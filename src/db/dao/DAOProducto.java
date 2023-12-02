@@ -60,9 +60,9 @@ public class DAOProducto implements DAO<Producto> {
             producto.setDescription(rs.getString("descripcion"));
  
         }
-
+        
+        conn.close();
         return producto;
-
     }
 
     @Override
