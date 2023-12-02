@@ -13,15 +13,15 @@ import javax.swing.table.AbstractTableModel;
  */
 public class TMFilter extends AbstractTableModel {
 
-    private List<Filtro> filtroLista;
+    private List<Venta> ventaLista;
 
-    public TMFilter(List<Filtro> filtroLista) {
-        this.filtroLista = filtroLista;
+    public TMFilter(List<Venta> ventaLista) {
+        this.ventaLista = ventaLista;
     }
 
     @Override
     public int getRowCount() {
-        return filtroLista.size();
+        return ventaLista.size();
     }
 
     @Override
@@ -32,19 +32,19 @@ public class TMFilter extends AbstractTableModel {
     // Método para obtener atributos de la clase Estudiante
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Filtro filtro = filtroLista.get(rowIndex);
+        Venta venta = ventaLista.get(rowIndex);
 
         return switch (columnIndex) {
             case 0 ->
-                filtro.getId();
+                venta.getId();
             case 1 ->
-                filtro.getPrice();
+                venta.getProductID();
             case 2 ->
-                filtro.getUser_id();
+                venta.getUserID();
             case 3 ->
-                filtro.getAmount();
+                venta.getAmount();
             case 4 ->
-                filtro.getDate();
+                venta.getFecha();
             default ->
                 "";
         };
@@ -56,7 +56,7 @@ public class TMFilter extends AbstractTableModel {
             case 0 ->
                 "ID";
             case 1 ->
-                "Precio";
+                "ID Producto";
             case 2 ->
                 "ID Usuario";
             case 3 ->

@@ -7,7 +7,6 @@ package gui;
 import db.dao.DAOFiltro;
 import db.dao.DAOManager;
 import db.dao.DAOProducto;
-import model.Filtro;
 import model.Producto;
 import model.TMFilter;
 import model.TMProducto;
@@ -1026,7 +1025,7 @@ public class Formulario extends javax.swing.JFrame {
         String fechaStartFormateada = formato_start.format(app_calendar_filter_start.getDate());
         String fechaEndFormateada = formato_end.format(app_calendar_filter_end.getDate());
         System.out.println(fechaStartFormateada + " - " + fechaEndFormateada);
-        manager.getdFiltro().
+        
     }//GEN-LAST:event_app_btn_filter_dateActionPerformed
 
     /**
@@ -1176,11 +1175,11 @@ public class Formulario extends javax.swing.JFrame {
         app_tbl_product.setModel(tmProducto);
     }
 
-    public void actualizarTablaFiltros() throws SQLException {
+    /*public void actualizarTablaFiltros() throws SQLException {
         DAOFiltro dao = manager.getdFiltro();
-        List<Filtro> lista = dao.getAll();
+        List<Venta> lista = dao.getAll();
         TMFilter tmFiltro = new TMFilter(lista);
         app_tbl_product.setModel(tmFiltro);
-    }
+    }*/
 
 }

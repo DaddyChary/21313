@@ -28,30 +28,41 @@ public class DAOProducto implements DAO<Producto> {
 
     @Override
     public void create(Producto t) throws SQLException {
-        String sql = "INSERT INTO productos VALUES('" + t.getId() + "','" + t.getName() + "','" + t.getPrice() + "','" + t.getDescription() + "')";
+        String sql = "INSERT INTO productos VALUES(" + t.getId() + ",'" + t.getName() + "'," + t.getPrice() + ",'" + t.getDescription() + "')";
         conn.execute(sql);
     }
 
     @Override
     public void update(Producto t) throws SQLException {
-        String sql = "UPDATE productos SET id ='" + t.getId() + "',nombre='" + t.getName() + "',precio='" + t.getPrice() + "',descripcion='" + t.getDescription() + "' WHERE id = '" + t.getId() + "'";
+        String sql = "UPDATE productos SET id =" + t.getId() + ",nombre='" + t.getName() + "',precio=" + t.getPrice() + ",descripcion='" + t.getDescription() + "' WHERE id = " + t.getId();
         conn.execute(sql);
     }
 
     @Override
     public void delete(Producto t) throws SQLException {
-        String sql = "DELETE FROM productos WHERE id='" + t.getId() + "'";
+        String sql = "DELETE FROM productos WHERE id=" + t.getId();
         conn.execute(sql);
     }
 
     @Override
     public Producto getOne(int id) throws SQLException {
-        //String sql = "SELECT * FROM productos WHERE id='" + id + "'";
-        return null;
-        //String sql = "SELECT * FROM productos WHERE id='" + id + "'";
+        String sql = "SELECT * FROM productos WHERE id=" + id;
+        ResultSet rs = conn.execute(sql);
+
+        Producto producto = null;
         
-        
-        
+        if (rs.next()) {
+            producto = new Producto();
+
+            producto.setId(rs.getInt("id"));
+            producto.setName(rs.getString("nombre"));
+            producto.setPrice(rs.getInt("precio"));
+            producto.setDescription(rs.getString("descripcion"));
+ 
+        }
+
+        return producto;
+
     }
 
     @Override
@@ -65,9 +76,9 @@ public class DAOProducto implements DAO<Producto> {
         while (rs.next()) {
             Producto producto = new Producto();
 
-            producto.setId(rs.getShort(rs.getShort("id")));
+            producto.setId(rs.getInt(("id")));
             producto.setName(rs.getString("nombre"));
-            producto.setPrice(rs.getShort(rs.getString("precio")));
+            producto.setPrice(rs.getInt(("precio")));
             producto.setDescription(rs.getString("descripcion"));
             listadeProductos.add(producto);
 
@@ -76,4 +87,4 @@ public class DAOProducto implements DAO<Producto> {
         return listadeProductos;
 
     }
-} 
+}

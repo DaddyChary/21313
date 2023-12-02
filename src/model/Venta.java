@@ -13,15 +13,19 @@ import java.time.LocalDate;
 public class Venta {
     
     private int id;
-    private int cantidad;
+    private int productID;
+    private int userID;
+    private int amount;
     private LocalDate fecha;
 
     public Venta() {
     }
 
-    public Venta(int id, int cantidad, LocalDate fecha) {
+    public Venta(int id, int productID, int userID, int amount, LocalDate fecha) {
         this.id = id;
-        this.cantidad = cantidad;
+        this.productID = productID;
+        this.userID = userID;
+        this.amount = amount;
         this.fecha = fecha;
     }
 
@@ -33,12 +37,28 @@ public class Venta {
         this.id = id;
     }
 
-    public int getCantidad() {
-        return cantidad;
+    public int getProductID() {
+        return productID;
     }
 
-    public void setCantidad(int cantidad) {
-        this.cantidad = cantidad;
+    public void setProductID(int productID) {
+        this.productID = productID;
+    }
+
+    public int getUserID() {
+        return userID;
+    }
+
+    public void setUserID(int userID) {
+        this.userID = userID;
+    }
+
+    public int getAmount() {
+        return amount;
+    }
+
+    public void setAmount(int amount) {
+        this.amount = amount;
     }
 
     public LocalDate getFecha() {
@@ -51,7 +71,8 @@ public class Venta {
 
     @Override
     public String toString() {
-        return "Venta{" + "id=" + id + ", cantidad=" + cantidad + ", fecha=" + fecha + '}';
+        return "Venta{" + "id=" + id + ", productID=" + productID + ", userID=" + userID + ", amount=" + amount + ", fecha=" + fecha + '}';
     }
-    
+
+
 }
