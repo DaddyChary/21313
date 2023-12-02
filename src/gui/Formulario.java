@@ -4,15 +4,12 @@
  */
 package gui;
 
-import db.dao.DAOFiltro;
 import db.dao.DAOManager;
 import db.dao.DAOProducto;
 import model.Producto;
-import model.TMFilter;
 import model.TMProducto;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
