@@ -4,7 +4,7 @@
  */
 package model;
 
-import java.time.LocalDate;
+import java.sql.Date;
 
 /**
  *
@@ -16,12 +16,12 @@ public class Filtro {
     private int price;
     private int user_id;
     private int amount;
-    private LocalDate date;
+    private Date date;
 
     public Filtro() {
     }
 
-    public Filtro(int price, int id, int user_id, int amount, LocalDate date) {
+    public Filtro(int price, int id, int user_id, int amount, Date date) {
         this.price = price;
         this.id = id;
         this.user_id = user_id;
@@ -61,11 +61,11 @@ public class Filtro {
         this.amount = amount;
     }
 
-    public LocalDate getDate() {
+    public Date getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(Date date) {
         this.date = date;
     }
 
