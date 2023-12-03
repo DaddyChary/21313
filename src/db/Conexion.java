@@ -16,7 +16,6 @@ import java.sql.Statement;
  */
 public class Conexion {
 
-
     private Connection conn;
     private Statement sen;
     private static Conexion conexion = null;
@@ -25,12 +24,12 @@ public class Conexion {
         String url = "jdbc:mysql://localhost/" + db + "?user=root&password=";
         conn = DriverManager.getConnection(url);
     }
-    
+
     public ResultSet execute(String query) throws SQLException {
         sen = conn.createStatement();
         if (query.toLowerCase().startsWith("insert")
-                || query.toLowerCase().startsWith("update") 
-                || query.toLowerCase().startsWith("delete")){
+                || query.toLowerCase().startsWith("update")
+                || query.toLowerCase().startsWith("delete")) {
             sen.executeUpdate(query);
             close();
             return null;
@@ -39,15 +38,16 @@ public class Conexion {
             return rs;
         }
     }
-        
-    public void close() throws SQLException {
-        sen.close();
-    }
-    
-    public static Conexion getConexion() throws SQLException{
+
+    public static Conexion getConexion() throws SQLException {
         if (conexion == null) {
             conexion = new Conexion("Navidad");
         }
         return conexion;
     }
+
+    public void close() throws SQLException {
+        sen.close();
+    }
+
 }

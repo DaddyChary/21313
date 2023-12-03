@@ -4,11 +4,7 @@
  */
 package gui;
 
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 
 /**
  *
@@ -17,16 +13,18 @@ import javax.swing.SwingConstants;
 public class Login extends javax.swing.JFrame {
 
     private final String RUT = "1234";
-    private App app;
+    private final App app;
 
     /**
      * Creates new form Login
+     *
+     * @param app
      */
     public Login(App app) {
         initComponents();
-        this.setTitle("Login");
-        setLocationRelativeTo(null);
+        setProperties();
         this.app = app;
+        app.cerrarVentana();
     }
 
     /**
@@ -65,7 +63,7 @@ public class Login extends javax.swing.JFrame {
             .addGap(0, 100, Short.MAX_VALUE)
         );
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -263,29 +261,22 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void app_login_joinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_login_joinActionPerformed
-        // TODO add your handling code here:
-
-        if (RUT.equals(app_login_rut.getText())) { // Utiliza equals para comparar cadenas, no ==
-            App formulario;
-            try {
-                JOptionPane.showConfirmDialog(null, "Sessión verificada con exito", "Acpetar", JOptionPane.DEFAULT_OPTION);
-                this.setVisible(false);
-                formulario = new App();
-                formulario.setVisible(true);
-            } catch (SQLException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        // Utiliza equals para comparar cadenas, no ==
+        if (RUT.equals(app_login_rut.getText())) {
+            JOptionPane.showConfirmDialog(null, "Sessión verificada con exito", "Acpetar", JOptionPane.DEFAULT_OPTION);
+            this.ocultarVentana();
+            app.mostrarVentana();
         } else {
             JOptionPane.showConfirmDialog(null, "Rut incorrecto", "Acpetar", JOptionPane.DEFAULT_OPTION);
         }
     }//GEN-LAST:event_app_login_joinActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-        app.mostrarVentana();
+        
     }//GEN-LAST:event_formWindowClosing
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JToggleButton app_login_join;
+    public javax.swing.JToggleButton app_login_join;
     private javax.swing.JTextField app_login_rut;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -301,4 +292,21 @@ public class Login extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     // End of variables declaration//GEN-END:variables
+
+    public final void setProperties() {
+        this.setTitle("Login");
+        setLocationRelativeTo(null);
+    }
+
+    public void mostrarVentana() {
+        this.setVisible(true);
+    }
+
+    public void ocultarVentana() {
+        this.setVisible(false);
+    }
+
+    void addComponentListener() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }

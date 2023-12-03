@@ -12,6 +12,7 @@ import java.sql.SQLException;
 
 import java.util.ArrayList;
 import java.util.List;
+import model.Usuario;
 
 /**
  *
@@ -50,7 +51,24 @@ public class DAOProducto implements DAO<Producto> {
 
     @Override
     public List<Producto> getAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "SELECT * FROM users";
+        ResultSet rs = conn.execute(sql);
+
+        List<Producto> listaProductos = new ArrayList<>();
+
+        while (rs.next()) {
+            Producto producto = new Producto();
+
+            producto.setId(rs.getInt(rs.getString("id")));
+            producto.setName(rs.getString("nombre"));
+            producto.setPrice(rs.getInt("precio"));
+            producto.setDescription(rs.getString("descripcion"));
+            listaProductos.add(producto);
+
+        }
+        conn.close();
+        return listaProductos;
+
     }
 
     
