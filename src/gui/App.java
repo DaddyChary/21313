@@ -4,15 +4,12 @@
  */
 package gui;
 
-import db.dao.DAOFiltro;
 import db.dao.DAOManager;
 import db.dao.DAOProducto;
 import model.Producto;
-import model.TMFilter;
-import model.TMProducto;
+import model.tm.TMProducto;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,17 +18,22 @@ import java.util.logging.Logger;
  *
  * @author DaddyChary
  */
-public class Formulario extends javax.swing.JFrame {
+public class App extends javax.swing.JFrame {
 
     private DAOManager manager;
 
     /**
      * Creates new form Formulario
+     * @throws java.sql.SQLException
      */
-    public Formulario() throws SQLException {
+    public App() throws SQLException {
         initComponents();
         this.setTitle("Formulario");
         this.setLocationRelativeTo(null);
+        cerrarVentana();
+        
+        Login login = new Login(this);
+        login.setVisible(true);
         this.manager = new DAOManager();
         //actualizarTablaProducto();
     }
@@ -987,8 +989,8 @@ public class Formulario extends javax.swing.JFrame {
 
     private void app_menu_item_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_menu_item_filterActionPerformed
         // TODO add your handling code here:
-        this.FilterDate.setVisible(true);
         this.FilterDate.setLocationRelativeTo(this);
+        this.FilterDate.setVisible(true);
         this.FilterDate.setSize(1080, 660);
         this.FilterDate.setTitle("FilterDate");
     }//GEN-LAST:event_app_menu_item_filterActionPerformed
@@ -1058,9 +1060,9 @@ public class Formulario extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {
             try {
-                new Formulario().setVisible(true);
+                new App().setVisible(true);
             } catch (SQLException ex) {
-                Logger.getLogger(Formulario.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             }
         });
     }
@@ -1181,5 +1183,13 @@ public class Formulario extends javax.swing.JFrame {
         TMFilter tmFiltro = new TMFilter(lista);
         app_tbl_product.setModel(tmFiltro);
     }*/
+    
+    public void mostrarVentana(){
+        this.setVisible(true);
+    }
+
+    public void cerrarVentana(){
+        this.setVisible(false);
+    }
 
 }

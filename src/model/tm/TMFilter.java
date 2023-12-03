@@ -2,47 +2,50 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package model;
+package model.tm;
 
 import java.util.List;
 import javax.swing.table.AbstractTableModel;
+import model.Venta;
 
 /**
  *
  * @author DaddyChary
  */
-public class TMProducto extends AbstractTableModel{
-    
-    private List<Producto> productList;
+public class TMFilter extends AbstractTableModel {
 
-    public TMProducto(List<Producto> productList) {
-        this.productList = productList;
+    private List<Venta> ventaLista;
+
+    public TMFilter(List<Venta> ventaLista) {
+        this.ventaLista = ventaLista;
     }
-    
+
     @Override
     public int getRowCount() {
-        return productList.size();
+        return ventaLista.size();
     }
 
     @Override
     public int getColumnCount() {
-        return 4;
+        return 5;
     }
 
     // Método para obtener atributos de la clase Estudiante
     @Override
     public Object getValueAt(int rowIndex, int columnIndex) {
-        Producto producto = productList.get(rowIndex);
+        Venta venta = ventaLista.get(rowIndex);
 
         return switch (columnIndex) {
             case 0 ->
-                producto.getId();
+                venta.getId();
             case 1 ->
-                producto.getName();
+                venta.getProductID();
             case 2 ->
-                producto.getPrice();
+                venta.getUserID();
             case 3 ->
-              producto.getDescription();
+                venta.getAmount();
+            case 4 ->
+                venta.getFecha();
             default ->
                 "";
         };
@@ -54,14 +57,16 @@ public class TMProducto extends AbstractTableModel{
             case 0 ->
                 "ID";
             case 1 ->
-                "Nombre";
+                "ID Producto";
             case 2 ->
-                "Precio";
+                "ID Usuario";
             case 3 ->
-                "Decripcion";
+                "Cantidad";
+            case 4 ->
+                "Fecha";
             default ->
                 " ";
         };
     }
-    
+
 }

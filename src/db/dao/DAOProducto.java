@@ -19,6 +19,8 @@ import java.util.List;
  */
 public class DAOProducto implements DAO<Producto> {
 
+    
+    
     private Conexion conn;
 
     public DAOProducto(Conexion conn) {
@@ -28,63 +30,28 @@ public class DAOProducto implements DAO<Producto> {
 
     @Override
     public void create(Producto t) throws SQLException {
-        String sql = "INSERT INTO productos VALUES(" + t.getId() + ",'" + t.getName() + "'," + t.getPrice() + ",'" + t.getDescription() + "')";
-        conn.execute(sql);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void update(Producto t) throws SQLException {
-        String sql = "UPDATE productos SET id =" + t.getId() + ",nombre='" + t.getName() + "',precio=" + t.getPrice() + ",descripcion='" + t.getDescription() + "' WHERE id = " + t.getId();
-        conn.execute(sql);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public void delete(Producto t) throws SQLException {
-        String sql = "DELETE FROM productos WHERE id=" + t.getId();
-        conn.execute(sql);
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public Producto getOne(int id) throws SQLException {
-        String sql = "SELECT * FROM productos WHERE id=" + id;
-        ResultSet rs = conn.execute(sql);
-
-        Producto producto = null;
-        
-        if (rs.next()) {
-            producto = new Producto();
-
-            producto.setId(rs.getInt("id"));
-            producto.setName(rs.getString("nombre"));
-            producto.setPrice(rs.getInt("precio"));
-            producto.setDescription(rs.getString("descripcion"));
- 
-        }
-        
-        conn.close();
-        return producto;
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
     public List<Producto> getAll() throws SQLException {
-
-        String sql = "SELECT * FROM productos";
-        ResultSet rs = conn.execute(sql);
-
-        List<Producto> listadeProductos = new ArrayList<>();
-
-        while (rs.next()) {
-            Producto producto = new Producto();
-
-            producto.setId(rs.getInt(("id")));
-            producto.setName(rs.getString("nombre"));
-            producto.setPrice(rs.getInt(("precio")));
-            producto.setDescription(rs.getString("descripcion"));
-            listadeProductos.add(producto);
-
-        }
-        conn.close();
-        return listadeProductos;
-
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
+
+    
 }

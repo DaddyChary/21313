@@ -6,6 +6,7 @@ import java.sql.SQLException;
 /**
  *
  * @author DaddyChary
+ * @param <T>
  */
 public interface DAO<T> {
     

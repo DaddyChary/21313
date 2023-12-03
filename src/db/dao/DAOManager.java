@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package db.dao;
 
 import db.Conexion;
@@ -17,7 +14,6 @@ public class DAOManager {
     private DAOProducto dProducto;
     private DAOVenta dVenta;
     private DAOUser dUser;
-    private DAOFiltro dFiltro;
 
     public DAOManager() throws SQLException {
         conn = Conexion.getConexion();
@@ -37,10 +33,5 @@ public class DAOManager {
     public DAOUser getdUser() {
         return dUser;
     }
-
-    public DAOFiltro getdFiltro() {
-        return dFiltro;
-    }
-
     
 }
