@@ -7,8 +7,10 @@ package db.dao;
 import db.dao.DAO;
 import model.Venta;
 import db.Conexion;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  *
@@ -46,12 +48,42 @@ public class DAOVenta implements DAO<Venta> {
 
     @Override
     public Venta getOne(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "SELECT * FROM ventas WHERE id =" + id + "";
+        ResultSet rs = conn.execute(sql);
+        
+        Venta venta = new Venta();
+        
+        if(rs.next()){
+            venta.setId(rs.getInt("id"));
+            venta.setProductID(rs.getInt("producto_id_fk"));
+            venta.setUserID(rs.getInt("user_id_fk"));
+            venta.setAmount(rs.getInt("cantidad"));
+            venta.setFecha(rs.getDate("fecha").toLocalDate());
+        }
+        conn.close();
+        return venta;
     }
 
     @Override
     public List<Venta> getAll() throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "SELECT * FROM ventas";
+        ResultSet rs = conn.execute(sql);
+
+        List<Venta> listadeVenta = new ArrayList<>();
+
+        while (rs.next()) {
+            Venta venta = new Venta();
+
+            venta.setId(rs.getInt("id"));
+            venta.setProductID(rs.getInt("producto_id_fk"));
+            venta.setUserID(rs.getInt("user_id_fk"));
+            venta.setAmount(rs.getInt("cantidad"));
+            venta.setFecha(rs.getDate("fecha").toLocalDate());
+            listadeVenta.add(venta);
+                       
+        }
+        conn.close();
+        return listadeVenta;
     }
 
 }
