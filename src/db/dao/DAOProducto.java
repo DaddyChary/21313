@@ -20,8 +20,6 @@ import model.Usuario;
  */
 public class DAOProducto implements DAO<Producto> {
 
-    
-    
     private Conexion conn;
 
     public DAOProducto(Conexion conn) {
@@ -31,22 +29,35 @@ public class DAOProducto implements DAO<Producto> {
 
     @Override
     public void create(Producto t) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "INSERT INTO productos (id, nombre, precio, descripcion) VALUES (null, '"+t.getName()+"', "+t.getPrice()+",'"+t.getDescription()+"');";
+        conn.execute(sql);
     }
 
     @Override
     public void update(Producto t) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "UPDATE productos SET precio = "+t.getPrice()+", descripcion = '"+t.getDescription()+"' WHERE id = "+t.getId()+"";
+        conn.execute(sql);
     }
 
     @Override
     public void delete(Producto t) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "DELETE FROM productos WHERE id = "+t.getId()+"";
+        conn.execute(sql);
     }
 
     @Override
     public Producto getOne(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "SELECT * FROM productos WHERE id ="+id+"";
+        ResultSet rs = conn.execute(sql);
+        Producto producto = new Producto();
+        if (rs.next()){
+            producto.setId(rs.getInt("id"));
+            producto.setName(rs.getString("nombre"));
+            producto.setPrice(rs.getInt("precio"));
+            producto.setDescription(rs.getString("descripcion"));
+        }
+        conn.close();
+        return producto;
     }
 
     @Override
@@ -71,5 +82,4 @@ public class DAOProducto implements DAO<Producto> {
 
     }
 
-    
 }

@@ -33,7 +33,7 @@ public class DAOUser implements DAO<Usuario> {
 
     @Override
     public void update(Usuario t) throws SQLException {
-        String sql = "UPDATE users SET id ='" + t.getId() + "',nombre='" + t.getName() + "',rut='" + t.getRut() +"' WHERE id = '" + t.getId() + "'";
+        String sql = "UPDATE users SET id ='" + t.getId() + "',nombre='" + t.getName() + "',rut='" + t.getRut() + "' WHERE id = '" + t.getId() + "'";
         conn.execute(sql);
     }
 
@@ -45,7 +45,16 @@ public class DAOUser implements DAO<Usuario> {
 
     @Override
     public Usuario getOne(int id) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "SELECT * FROM users WHERE id =" + id + "";
+        ResultSet rs = conn.execute(sql);
+        Usuario usuario = new Usuario();
+        if (rs.next()) {
+            usuario.setId(rs.getInt("id"));
+            usuario.setName(rs.getString("nombre"));
+            usuario.setRut(rs.getString("rut"));
+        }
+        conn.close();
+        return usuario;
     }
 
     @Override

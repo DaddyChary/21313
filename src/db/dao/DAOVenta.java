@@ -24,18 +24,24 @@ public class DAOVenta implements DAO<Venta> {
 
     @Override
     public void create(Venta t) throws SQLException {
-        String sql = "INSERT INTO ventas (producto_id_fk, user_id_fk, cantidad, fecha) SELECT productos.id, users.id, 123, '2023-12-25' FROM productos JOIN users ON users.id = productos.id WHERE productos.id = 2;";
+        String sql = "INSERT INTO ventas (producto_id_fk, user_id_fk, cantidad, fecha) SELECT productos.id,"
+                + " users.id, 123, '2023-12-25' FROM productos JOIN users ON users.id = productos.id WHERE productos.id = 2;";
         conn.execute(sql);
     }
 
     @Override
     public void update(Venta t) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "UPDATE ventas INNER JOIN productos ON ventas.producto_id_fk = productos.id "
+                + "INNER JOIN users ON ventas.user_id_fk = users.id SET ventas.cantidad = 10,"
+                + " ventas.fecha = '2023-12-03' WHERE ventas.id = 1";
+        conn.execute(sql);
     }
 
     @Override
     public void delete(Venta t) throws SQLException {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        String sql = "DELETE ventas, productos, users FROM ventas"
+                + " INNER JOIN productos ON ventas.producto_id_fk = productos.id INNER JOIN "
+                + "users ON ventas.user_id_fk = users.id WHERE ventas.id = 1";
     }
 
     @Override

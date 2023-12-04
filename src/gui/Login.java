@@ -20,6 +20,7 @@ public class Login extends javax.swing.JFrame {
      *
      * @param app
      */
+    
     public Login(App app) {
         initComponents();
         setProperties();

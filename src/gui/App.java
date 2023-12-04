@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.SwingConstants;
 
 /**
  *
@@ -22,7 +23,6 @@ public final class App extends javax.swing.JFrame {
 
     private Login login;
     private DAOManager manager;
-    private AppController controller = null;
 
     /**
      * Creates new form Formulario
@@ -31,16 +31,15 @@ public final class App extends javax.swing.JFrame {
         initComponents();
         setProperties();
         
-        controller = new AppController();
-        
         login = new Login(this);
         login.mostrarVentana();
-        login.app_login_join.addActionListener(controller);
         
         try {
             this.manager = new DAOManager();
+            
             //actualizarTablaProducto();
         } catch (SQLException ex) {
+            System.out.println("Prende el XAMMP aweonao");
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
         

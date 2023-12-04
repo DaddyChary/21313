@@ -35,3 +35,11 @@ CREATE TABLE ventas(
     FOREIGN KEY(producto_id_fk) REFERENCES productos(id),
     FOREIGN KEY(user_id_fk) REFERENCES users(id)
 );
+
+
+
+
+-- Eliminar la venta con id = 1 y sus datos relacionados en las tablas productos y users
+DELETE ventas, productos, users FROM ventas INNER JOIN productos ON ventas.producto_id_fk = productos.id INNER JOIN users ON ventas.user_id_fk = users.id WHERE ventas.id = 1;
+
+
