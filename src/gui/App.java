@@ -6,6 +6,7 @@ package gui;
 
 import db.dao.DAOManager;
 import db.dao.DAOProducto;
+import db.dao.DAOVenta;
 import model.Producto;
 import model.tm.TMProducto;
 import java.sql.SQLException;
@@ -14,6 +15,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import model.Usuario;
 import model.Venta;
@@ -238,9 +240,9 @@ public final class App extends javax.swing.JFrame {
                 .addComponent(app_calendar_filter_start, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                 .addComponent(app_calendar_filter_end, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(11, 11, 11))
         );
 
         app_btn_filter_date.setText("Filtrar Por Fecha");
@@ -256,19 +258,19 @@ public final class App extends javax.swing.JFrame {
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 259, Short.MAX_VALUE)
-                    .addComponent(app_btn_filter_date, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(app_btn_filter_date, javax.swing.GroupLayout.PREFERRED_SIZE, 259, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel8Layout.setVerticalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel9, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel9, javax.swing.GroupLayout.DEFAULT_SIZE, 127, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(app_btn_filter_date)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -361,7 +363,7 @@ public final class App extends javax.swing.JFrame {
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                        .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE))
                     .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -608,6 +610,11 @@ public final class App extends javax.swing.JFrame {
         app_add_user_rut.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         app_btn_add_user.setText("Agregar Usuario");
+        app_btn_add_user.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                app_btn_add_userActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel16Layout = new javax.swing.GroupLayout(jPanel16);
         jPanel16.setLayout(jPanel16Layout);
@@ -1066,8 +1073,25 @@ public final class App extends javax.swing.JFrame {
 
     private void app_btn_generate_balanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_generate_balanceActionPerformed
         // TODO add your handling code here:
-        
-        
+        SimpleDateFormat formato_start = new SimpleDateFormat(app_calendar_filter_start.getDateFormatString());
+        SimpleDateFormat formato_end = new SimpleDateFormat(app_calendar_filter_end.getDateFormatString());
+        String fechaStartFormateada = formato_start.format(app_calendar_filter_start.getDate());
+        String fechaEndFormateada = formato_end.format(app_calendar_filter_end.getDate());
+        Date fechaStart = Date.valueOf(fechaStartFormateada);
+        Date fechaEnd = Date.valueOf(fechaEndFormateada);
+
+        try {
+            //manager.getdVenta().getTotalVentas(fechaStart, fechaEnd);
+            JOptionPane.showConfirmDialog(null, "El Balance total de las ventas entre las fechas "
+                    +fechaStartFormateada+ " y " +fechaEndFormateada+" es:"
+                    +""+manager.getdVenta().getTotalVentas(fechaStart, fechaEnd), 
+                    "Acpetar", JOptionPane.DEFAULT_OPTION);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("No se pudo obtener el balance");
+        }
+
     }//GEN-LAST:event_app_btn_generate_balanceActionPerformed
 
     private void app_btn_filter_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_filter_dateActionPerformed
@@ -1077,7 +1101,7 @@ public final class App extends javax.swing.JFrame {
         String fechaEndFormateada = formato_end.format(app_calendar_filter_end.getDate());
         Date fechaStart = Date.valueOf(fechaStartFormateada);
         Date fechaEnd = Date.valueOf(fechaEndFormateada);
-        
+
         System.out.println(fechaStartFormateada + " - " + fechaEndFormateada);
         try {
             List<Venta> lista = manager.getdVenta().getAll(fechaStart, fechaEnd);
@@ -1090,13 +1114,13 @@ public final class App extends javax.swing.JFrame {
     }//GEN-LAST:event_app_btn_filter_dateActionPerformed
 
     private void app_btn_store_add_trolleyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_store_add_trolleyActionPerformed
-        
+
         try {
-           
+
             int id = app_cb_store_product.getSelectedIndex();
             Producto producto;
             producto = manager.getdProducto().getOne(id);
-            
+
             Usuario user = manager.getdUser().getOne(app_txt_store_rut.getText());
 
             Venta venta = new Venta();
@@ -1106,12 +1130,10 @@ public final class App extends javax.swing.JFrame {
             venta.setAmount(Integer.parseInt(app_txt_store_amount.getText()));
             //System.out.println(venta);
             manager.getdVenta().create(venta);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-            
-
 
 
     }//GEN-LAST:event_app_btn_store_add_trolleyActionPerformed
@@ -1119,6 +1141,27 @@ public final class App extends javax.swing.JFrame {
     private void app_cb_store_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_cb_store_productActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_app_cb_store_productActionPerformed
+
+    private void app_btn_add_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_add_userActionPerformed
+        try {
+            // TODO add your handling code here:
+            
+            Usuario usuario = new Usuario();
+            
+            usuario.setName(app_add_user_name.getText());
+            usuario.setRut(app_add_user_rut.getText());
+
+            manager.getdUser().create(usuario);
+            JOptionPane.showConfirmDialog(null, "Usuario creado correctamente", "Acpetar", JOptionPane.DEFAULT_OPTION);
+            
+            
+          
+        } catch (SQLException ex) {
+            JOptionPane.showConfirmDialog(null, "El usuario ya existe", "Acpetar", JOptionPane.DEFAULT_OPTION);
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+    }//GEN-LAST:event_app_btn_add_userActionPerformed
 
     /**
      * @param args the command line arguments

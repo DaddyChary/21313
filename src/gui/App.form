@@ -58,7 +58,7 @@
                           <Group type="102" attributes="0">
                               <Component id="jPanel7" min="-2" max="-2" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jLabel31" pref="221" max="32767" attributes="0"/>
+                              <Component id="jLabel31" pref="208" max="32767" attributes="0"/>
                           </Group>
                           <Component id="jPanel10" max="32767" attributes="0"/>
                       </Group>
@@ -200,9 +200,9 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="jPanel9" pref="259" max="32767" attributes="0"/>
-                                  <Component id="app_btn_filter_date" max="32767" attributes="0"/>
+                              <Group type="103" groupAlignment="0" attributes="0">
+                                  <Component id="jPanel9" min="-2" pref="259" max="-2" attributes="0"/>
+                                  <Component id="app_btn_filter_date" alignment="0" min="-2" pref="259" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                           </Group>
@@ -212,10 +212,10 @@
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="0" attributes="0">
                               <EmptySpace max="-2" attributes="0"/>
-                              <Component id="jPanel9" min="-2" pref="114" max="-2" attributes="0"/>
+                              <Component id="jPanel9" pref="127" max="32767" attributes="0"/>
                               <EmptySpace max="-2" attributes="0"/>
                               <Component id="app_btn_filter_date" min="-2" max="-2" attributes="0"/>
-                              <EmptySpace max="32767" attributes="0"/>
+                              <EmptySpace max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -259,9 +259,9 @@
                                   <Component id="app_calendar_filter_start" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
                                   <Component id="jLabel15" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
+                                  <EmptySpace pref="12" max="32767" attributes="0"/>
                                   <Component id="app_calendar_filter_end" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="32767" attributes="0"/>
+                                  <EmptySpace min="-2" pref="11" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                         </DimensionLayout>
@@ -836,6 +836,9 @@
                   <Properties>
                     <Property name="text" type="java.lang.String" value="Agregar Usuario"/>
                   </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="app_btn_add_userActionPerformed"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>

@@ -16,6 +16,7 @@ public class Venta {
     private int id;
     private int productID;
     private int price;
+    private int total_ventas;
     private String productName;
     private String userName;
     private int userID;
@@ -25,10 +26,11 @@ public class Venta {
     public Venta() {
     }
 
-    public Venta(int id, int productID, int price, String productName, String userName, int userID, int amount, Date fecha) {
+    public Venta(int id, int productID, int price, int total_ventas, String productName, String userName, int userID, int amount, Date fecha) {
         this.id = id;
         this.productID = productID;
         this.price = price;
+        this.total_ventas = total_ventas;
         this.productName = productName;
         this.userName = userName;
         this.userID = userID;
@@ -58,6 +60,14 @@ public class Venta {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public int getTotal_ventas() {
+        return total_ventas;
+    }
+
+    public void setTotal_ventas(int total_ventas) {
+        this.total_ventas = total_ventas;
     }
 
     public String getProductName() {
@@ -102,8 +112,7 @@ public class Venta {
 
     @Override
     public String toString() {
-        return "Venta{" + "id=" + id + ", productID=" + productID + ", price=" + price + ", productName=" + productName + ", userName=" + userName + ", userID=" + userID + ", amount=" + amount + ", fecha=" + fecha + '}';
+        return "Venta{" + "id=" + id + ", productID=" + productID + ", price=" + price + ", total_ventas=" + total_ventas + ", productName=" + productName + ", userName=" + userName + ", userID=" + userID + ", amount=" + amount + ", fecha=" + fecha + '}';
     }
-
 
 }

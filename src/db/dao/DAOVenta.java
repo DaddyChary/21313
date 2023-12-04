@@ -89,7 +89,7 @@ public class DAOVenta implements DAO<Venta> {
     public List<Venta> getAll(Date fecha_Start, Date fecha_end) throws SQLException {
         String sql = "SELECT ventas.id,productos.nombre AS nombreProducto,users.nombre AS nombreUsuario,ventas.cantidad,ventas.fecha FROM "
                 + "ventas INNER JOIN productos ON ventas.producto_id_fk = productos.id "
-                + "INNER JOIN users ON ventas.user_id_fk = users.id WHERE fecha BETWEEN '"+fecha_Start+"' AND '"+fecha_end+"'";
+                + "INNER JOIN users ON ventas.user_id_fk = users.id WHERE fecha BETWEEN '" + fecha_Start + "' AND '" + fecha_end + "'";
         //System.out.println(sql);
         ResultSet rs = conn.execute(sql);
 
@@ -110,28 +110,23 @@ public class DAOVenta implements DAO<Venta> {
         conn.close();
         return listaVenta;
     }
-    
-        public List<Venta> getVentas(Date fecha_Start, Date fecha_end) throws SQLException {
-        String sql = "SELECT SUM(precio * cantidad) AS total_ventas FROM ventas JOIN productos "
-                + "ON ventas.producto_id_fk = productos.id WHERE fecha BETWEEN '"+fecha_Start+"' AND '"+fecha_end+"';";
+
+    public int getTotalVentas(Date fecha_Start, Date fecha_end) throws SQLException {
+        String sql = "SELECT SUM(precio * cantidad) AS total_ventas FROM ventas INNER JOIN productos "
+                + "ON ventas.producto_id_fk = productos.id WHERE fecha BETWEEN '" + fecha_Start + "' AND '" + fecha_end + "';";
         //System.out.println(sql);
         ResultSet rs = conn.execute(sql);
 
-        List<Venta> listaVenta = new ArrayList<>();
+        int ventaTotal = 0;
 
         while (rs.next()) {
-            Venta venta = new Venta();
 
-            
-            venta.setAmount(rs.getInt("cantidad"));
-            venta.setFecha(rs.getDate("fecha"));
-
-            listaVenta.add(venta);
+            ventaTotal = (rs.getInt("total_ventas"));
 
         }
         conn.close();
-        return listaVenta;
-        
+        return ventaTotal;
+
     }
 
 }
