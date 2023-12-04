@@ -9,6 +9,7 @@ import model.Venta;
 import db.Conexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Date;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -26,8 +27,7 @@ public class DAOVenta implements DAO<Venta> {
 
     @Override
     public void create(Venta t) throws SQLException {
-        String sql = "INSERT INTO ventas (producto_id_fk, user_id_fk, cantidad, fecha) SELECT productos.id,"
-                + " users.id, 123, '2023-12-25' FROM productos JOIN users ON users.id = productos.id WHERE productos.id = 2;";
+        String sql = "INSERT INTO ventas (id, producto_id_fk, user_id_fk, cantidad, fecha) VALUES (null, " + t.getProductID() + ", " + t.getUserID() + "," + t.getAmount() + ", NOW())";
         conn.execute(sql);
     }
 
@@ -50,15 +50,15 @@ public class DAOVenta implements DAO<Venta> {
     public Venta getOne(int id) throws SQLException {
         String sql = "SELECT * FROM ventas WHERE id =" + id + "";
         ResultSet rs = conn.execute(sql);
-        
+
         Venta venta = new Venta();
-        
-        if(rs.next()){
+
+        if (rs.next()) {
             venta.setId(rs.getInt("id"));
             venta.setProductID(rs.getInt("producto_id_fk"));
             venta.setUserID(rs.getInt("user_id_fk"));
             venta.setAmount(rs.getInt("cantidad"));
-            venta.setFecha(rs.getDate("fecha").toLocalDate());
+            venta.setFecha(rs.getDate("fecha"));
         }
         conn.close();
         return venta;
@@ -78,12 +78,60 @@ public class DAOVenta implements DAO<Venta> {
             venta.setProductID(rs.getInt("producto_id_fk"));
             venta.setUserID(rs.getInt("user_id_fk"));
             venta.setAmount(rs.getInt("cantidad"));
-            venta.setFecha(rs.getDate("fecha").toLocalDate());
+            venta.setFecha(rs.getDate("fecha"));
             listadeVenta.add(venta);
-                       
+
         }
         conn.close();
         return listadeVenta;
+    }
+
+    public List<Venta> getAll(Date fecha_Start, Date fecha_end) throws SQLException {
+        String sql = "SELECT ventas.id,productos.nombre AS nombreProducto,users.nombre AS nombreUsuario,ventas.cantidad,ventas.fecha FROM "
+                + "ventas INNER JOIN productos ON ventas.producto_id_fk = productos.id "
+                + "INNER JOIN users ON ventas.user_id_fk = users.id WHERE fecha BETWEEN '"+fecha_Start+"' AND '"+fecha_end+"'";
+        //System.out.println(sql);
+        ResultSet rs = conn.execute(sql);
+
+        List<Venta> listaVenta = new ArrayList<>();
+
+        while (rs.next()) {
+            Venta venta = new Venta();
+
+            venta.setId(rs.getInt("id"));
+            venta.setProductName(rs.getString("nombreProducto"));
+            venta.setUserName(rs.getString("nombreUsuario"));
+            venta.setAmount(rs.getInt("cantidad"));
+            venta.setFecha(rs.getDate("fecha"));
+
+            listaVenta.add(venta);
+
+        }
+        conn.close();
+        return listaVenta;
+    }
+    
+        public List<Venta> getVentas(Date fecha_Start, Date fecha_end) throws SQLException {
+        String sql = "SELECT SUM(precio * cantidad) AS total_ventas FROM ventas JOIN productos "
+                + "ON ventas.producto_id_fk = productos.id WHERE fecha BETWEEN '"+fecha_Start+"' AND '"+fecha_end+"';";
+        //System.out.println(sql);
+        ResultSet rs = conn.execute(sql);
+
+        List<Venta> listaVenta = new ArrayList<>();
+
+        while (rs.next()) {
+            Venta venta = new Venta();
+
+            
+            venta.setAmount(rs.getInt("cantidad"));
+            venta.setFecha(rs.getDate("fecha"));
+
+            listaVenta.add(venta);
+
+        }
+        conn.close();
+        return listaVenta;
+        
     }
 
 }

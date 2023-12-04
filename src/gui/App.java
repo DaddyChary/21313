@@ -9,11 +9,15 @@ import db.dao.DAOProducto;
 import model.Producto;
 import model.tm.TMProducto;
 import java.sql.SQLException;
+import java.sql.Date;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.SwingConstants;
+import model.Usuario;
+import model.Venta;
+import model.tm.TMVenta;
 
 /**
  *
@@ -27,22 +31,22 @@ public final class App extends javax.swing.JFrame {
     /**
      * Creates new form Formulario
      */
-    public App(){
+    public App() {
         initComponents();
         setProperties();
-        
+
         login = new Login(this);
         login.mostrarVentana();
-        
+
         try {
             this.manager = new DAOManager();
-            
+
             //actualizarTablaProducto();
         } catch (SQLException ex) {
             System.out.println("Prende el XAMMP aweonao");
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }
 
     /**
@@ -74,6 +78,7 @@ public final class App extends javax.swing.JFrame {
         jPanel10 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
         app_tbl_filter = new javax.swing.JTable();
+        jLabel31 = new javax.swing.JLabel();
         Ventas = new javax.swing.JFrame();
         jPanel11 = new javax.swing.JPanel();
         jPanel12 = new javax.swing.JPanel();
@@ -171,7 +176,7 @@ public final class App extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 638, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, 97, Short.MAX_VALUE)
                 .addGap(140, 140, 140))
         );
         jPanel6Layout.setVerticalGroup(
@@ -274,19 +279,14 @@ public final class App extends javax.swing.JFrame {
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel7Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel7Layout.createSequentialGroup()
                         .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(app_btn_generate_balance, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel7Layout.createSequentialGroup()
-                                .addContainerGap()
-                                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(app_btn_generate_balance, javax.swing.GroupLayout.PREFERRED_SIZE, 281, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel7Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(jLabel16, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel7Layout.setVerticalGroup(
@@ -298,7 +298,7 @@ public final class App extends javax.swing.JFrame {
                 .addComponent(app_btn_generate_balance, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(jLabel16)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
 
         app_tbl_filter.setModel(new javax.swing.table.DefaultTableModel(
@@ -320,16 +320,19 @@ public final class App extends javax.swing.JFrame {
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 723, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel10Layout.setVerticalGroup(
             jPanel10Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel10Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 608, Short.MAX_VALUE)
+                .addComponent(jScrollPane2)
                 .addContainerGap())
         );
+
+        jLabel31.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel31.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/selectivo (1).png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -340,9 +343,12 @@ public final class App extends javax.swing.JFrame {
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jPanel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
-                        .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jPanel10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -352,10 +358,11 @@ public final class App extends javax.swing.JFrame {
                 .addComponent(jPanel6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel5Layout.createSequentialGroup()
                         .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel31, javax.swing.GroupLayout.DEFAULT_SIZE, 221, Short.MAX_VALUE))
+                    .addComponent(jPanel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -363,11 +370,13 @@ public final class App extends javax.swing.JFrame {
         FilterDate.getContentPane().setLayout(FilterDateLayout);
         FilterDateLayout.setHorizontalGroup(
             FilterDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addGroup(FilterDateLayout.createSequentialGroup()
+                .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         FilterDateLayout.setVerticalGroup(
             FilterDateLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(jPanel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         Ventas.setBackground(new java.awt.Color(172, 32, 40));
@@ -379,10 +388,20 @@ public final class App extends javax.swing.JFrame {
         jLabel27.setText("Que desea comprar");
 
         app_cb_store_product.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arbol de Navidad", "Bolas de Navidad ", "Luces de Navidad", "Estrella de Navidad", "Guirnaldas", "Adornos Colgantes", "Coronas Navideñas", "Figuras y decoraciones tematicas", "Velas Navideñas", "Centros de mesa" }));
+        app_cb_store_product.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                app_cb_store_productActionPerformed(evt);
+            }
+        });
 
         jLabel28.setText("Cantidad a comprar");
 
         app_btn_store_add_trolley.setText("Agregar al carrito");
+        app_btn_store_add_trolley.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                app_btn_store_add_trolleyActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
@@ -483,13 +502,11 @@ public final class App extends javax.swing.JFrame {
         jPanel18Layout.setHorizontalGroup(
             jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel18Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(app_btn_store_refresh_price, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel18Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel18Layout.setVerticalGroup(
@@ -1022,7 +1039,7 @@ public final class App extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.FilterDate.setLocationRelativeTo(this);
         this.FilterDate.setVisible(true);
-        this.FilterDate.setSize(1080, 660);
+        this.FilterDate.setSize(1128, 840);
         this.FilterDate.setTitle("FilterDate");
     }//GEN-LAST:event_app_menu_item_filterActionPerformed
 
@@ -1049,6 +1066,8 @@ public final class App extends javax.swing.JFrame {
 
     private void app_btn_generate_balanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_generate_balanceActionPerformed
         // TODO add your handling code here:
+        
+        
     }//GEN-LAST:event_app_btn_generate_balanceActionPerformed
 
     private void app_btn_filter_dateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_filter_dateActionPerformed
@@ -1056,17 +1075,51 @@ public final class App extends javax.swing.JFrame {
         SimpleDateFormat formato_end = new SimpleDateFormat(app_calendar_filter_end.getDateFormatString());
         String fechaStartFormateada = formato_start.format(app_calendar_filter_start.getDate());
         String fechaEndFormateada = formato_end.format(app_calendar_filter_end.getDate());
+        Date fechaStart = Date.valueOf(fechaStartFormateada);
+        Date fechaEnd = Date.valueOf(fechaEndFormateada);
+        
         System.out.println(fechaStartFormateada + " - " + fechaEndFormateada);
         try {
-            List<Producto> lista =  manager.getdProducto().getAll();
-            TMProducto tmProducto = new TMProducto(lista);
-            app_tbl_filter.setModel(tmProducto);
+            List<Venta> lista = manager.getdVenta().getAll(fechaStart, fechaEnd);
+            TMVenta tmVenta = new TMVenta(lista);
+            app_tbl_filter.setModel(tmVenta);
         } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("No se pudo obtener la lista");
         }
     }//GEN-LAST:event_app_btn_filter_dateActionPerformed
 
-    
+    private void app_btn_store_add_trolleyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_store_add_trolleyActionPerformed
+        
+        try {
+           
+            int id = app_cb_store_product.getSelectedIndex();
+            Producto producto;
+            producto = manager.getdProducto().getOne(id);
+            
+            Usuario user = manager.getdUser().getOne(app_txt_store_rut.getText());
+
+            Venta venta = new Venta();
+
+            venta.setProductID(producto.getId());
+            venta.setUserID(user.getId());
+            venta.setAmount(Integer.parseInt(app_txt_store_amount.getText()));
+            //System.out.println(venta);
+            manager.getdVenta().create(venta);
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+            
+
+
+
+    }//GEN-LAST:event_app_btn_store_add_trolleyActionPerformed
+
+    private void app_cb_store_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_cb_store_productActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_app_cb_store_productActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1088,7 +1141,7 @@ public final class App extends javax.swing.JFrame {
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(() -> {
-                new App();
+            new App();
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1153,6 +1206,7 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
+    private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -1209,12 +1263,11 @@ public final class App extends javax.swing.JFrame {
         TMFilter tmFiltro = new TMFilter(lista);
         app_tbl_product.setModel(tmFiltro);
     }*/
-    
-    public void mostrarVentana(){
+    public void mostrarVentana() {
         this.setVisible(true);
     }
 
-    public void cerrarVentana(){
+    public void cerrarVentana() {
         this.setVisible(false);
     }
 
@@ -1223,6 +1276,5 @@ public final class App extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
         this.cerrarVentana();
     }
-
 
 }

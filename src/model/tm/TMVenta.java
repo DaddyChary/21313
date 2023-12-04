@@ -12,11 +12,11 @@ import model.Venta;
  *
  * @author DaddyChary
  */
-public class TMFilter extends AbstractTableModel {
+public class TMVenta extends AbstractTableModel {
 
     private List<Venta> ventaLista;
 
-    public TMFilter(List<Venta> ventaLista) {
+    public TMVenta(List<Venta> ventaLista) {
         this.ventaLista = ventaLista;
     }
 
@@ -39,9 +39,9 @@ public class TMFilter extends AbstractTableModel {
             case 0 ->
                 venta.getId();
             case 1 ->
-                venta.getProductID();
+                venta.getProductName();
             case 2 ->
-                venta.getUserID();
+                venta.getUserName();
             case 3 ->
                 venta.getAmount();
             case 4 ->
@@ -57,9 +57,9 @@ public class TMFilter extends AbstractTableModel {
             case 0 ->
                 "ID";
             case 1 ->
-                "ID Producto";
+                "Producto";
             case 2 ->
-                "ID Usuario";
+                "Usuario";
             case 3 ->
                 "Cantidad";
             case 4 ->

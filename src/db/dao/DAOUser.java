@@ -27,7 +27,7 @@ public class DAOUser implements DAO<Usuario> {
 
     @Override
     public void create(Usuario t) throws SQLException {
-        String sql = "INSERT INTO users VALUES('" + t.getId() + "','" + t.getName() + "','" + t.getRut() + "')";
+        String sql = "INSERT INTO users VALUES(null,'" + t.getName() + "','" + t.getRut() + "')";
         conn.execute(sql);
     }
 
@@ -77,4 +77,16 @@ public class DAOUser implements DAO<Usuario> {
         return listadeUsuarios;
     }
 
+    public Usuario getOne(String rut) throws SQLException {
+        String sql = "SELECT * FROM users WHERE rut ='" + rut + "'";
+        ResultSet rs = conn.execute(sql);
+        Usuario usuario = new Usuario();
+        if (rs.next()) {
+            usuario.setId(rs.getInt("id"));
+            usuario.setName(rs.getString("nombre"));
+            usuario.setRut(rs.getString("rut"));
+        }
+        conn.close();
+        return usuario;
+    }
 }

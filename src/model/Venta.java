@@ -4,7 +4,8 @@
  */
 package model;
 
-import java.time.LocalDate;
+
+import java.sql.Date;
 
 /**
  *
@@ -14,16 +15,22 @@ public class Venta {
     
     private int id;
     private int productID;
+    private int price;
+    private String productName;
+    private String userName;
     private int userID;
     private int amount;
-    private LocalDate fecha;
+    private Date fecha;
 
     public Venta() {
     }
 
-    public Venta(int id, int productID, int userID, int amount, LocalDate fecha) {
+    public Venta(int id, int productID, int price, String productName, String userName, int userID, int amount, Date fecha) {
         this.id = id;
         this.productID = productID;
+        this.price = price;
+        this.productName = productName;
+        this.userName = userName;
         this.userID = userID;
         this.amount = amount;
         this.fecha = fecha;
@@ -45,6 +52,30 @@ public class Venta {
         this.productID = productID;
     }
 
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
+    }
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public String getUserName() {
+        return userName;
+    }
+
+    public void setUserName(String userName) {
+        this.userName = userName;
+    }
+
     public int getUserID() {
         return userID;
     }
@@ -61,17 +92,17 @@ public class Venta {
         this.amount = amount;
     }
 
-    public LocalDate getFecha() {
+    public Date getFecha() {
         return fecha;
     }
 
-    public void setFecha(LocalDate fecha) {
+    public void setFecha(Date fecha) {
         this.fecha = fecha;
     }
 
     @Override
     public String toString() {
-        return "Venta{" + "id=" + id + ", productID=" + productID + ", userID=" + userID + ", amount=" + amount + ", fecha=" + fecha + '}';
+        return "Venta{" + "id=" + id + ", productID=" + productID + ", price=" + price + ", productName=" + productName + ", userName=" + userName + ", userID=" + userID + ", amount=" + amount + ", fecha=" + fecha + '}';
     }
 
 

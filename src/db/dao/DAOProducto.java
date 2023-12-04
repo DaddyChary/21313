@@ -9,7 +9,6 @@ import model.Producto;
 import db.Conexion;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import java.util.ArrayList;
 import java.util.List;
 import model.Usuario;
@@ -62,7 +61,7 @@ public class DAOProducto implements DAO<Producto> {
 
     @Override
     public List<Producto> getAll() throws SQLException {
-        String sql = "SELECT * FROM users";
+        String sql = "SELECT * FROM productos";
         ResultSet rs = conn.execute(sql);
 
         List<Producto> listaProductos = new ArrayList<>();
@@ -81,5 +80,5 @@ public class DAOProducto implements DAO<Producto> {
         return listaProductos;
 
     }
-
+    
 }
