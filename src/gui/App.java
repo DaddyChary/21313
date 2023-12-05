@@ -44,30 +44,17 @@ public final class App extends javax.swing.JFrame {
         login.mostrarVentana();
 
         try {
+            
             this.manager = new DAOManager();
-
+            
             TMProducto tMProducto = new TMProducto(manager.getdProducto().getAll());
             app_tbl_product.setModel(tMProducto);
-            //actualizarTablaProducto();
+            
         } catch (SQLException ex) {
-            System.out.println("Prende el XAMMP aweonao");
+            JOptionPane.showConfirmDialog(null, "Enciende el Xammp", "Aceptar", JOptionPane.DEFAULT_OPTION);
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-
         actualizarComboboxProductos();
-        //List<String> nombres;
-        /*try {
-            nombres = manager.getdProducto().getNameProducto();
-            for (String nombre : nombres ) {
-                System.out.println(nombre);
-                app_cb_product_modify.addItem(nombre);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("error al cargar el combobox de nombre de productos");
-            
-        }*/
-
     }
 
     /**
@@ -1055,30 +1042,28 @@ public final class App extends javax.swing.JFrame {
             producto.setDescription(app_txt_add_product_description.getText());
             manager.getdProducto().create(producto);
             actualizarTablaProducto();
-            System.out.println("se agrego el producto");
+            JOptionPane.showConfirmDialog(null, "Se agrego el producto correctamente", "Aceptar", JOptionPane.DEFAULT_OPTION);
 
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("error  al crear el producto");
-        }
+            JOptionPane.showConfirmDialog(null, "Error al agregar el producto", "Aceptar", JOptionPane.DEFAULT_OPTION);
+        } 
 
 
     }//GEN-LAST:event_app_btn_add_productActionPerformed
 
     private void app_btn_delete_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_delete_productActionPerformed
         try {
+            
             Producto producto = new Producto();
-
             producto.setId(Integer.parseInt(app_txt_delete_id_product.getText()));
-
             manager.getdProducto().delete(producto);
-
             actualizarTablaProducto();
 
-            System.out.println("se elemino correctamente");
+            JOptionPane.showConfirmDialog(null, "El producto se elimino correctamente", "Aceptar", JOptionPane.DEFAULT_OPTION);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("no se pudo eleminar el producto");
+            JOptionPane.showConfirmDialog(null, "El producto no pudo ser eliminado", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
 
     }//GEN-LAST:event_app_btn_delete_productActionPerformed
@@ -1086,7 +1071,6 @@ public final class App extends javax.swing.JFrame {
     private void app_menu_item_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_menu_item_filterActionPerformed
         // TODO add your handling code here:
         this.FilterDate.setVisible(true);
-
     }//GEN-LAST:event_app_menu_item_filterActionPerformed
 
     private void app_menu_item_ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_menu_item_ventasActionPerformed
@@ -1117,7 +1101,7 @@ public final class App extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("No se pudo obtener el balance");
+            JOptionPane.showConfirmDialog(null, "No se pudo obtener el balance", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
 
     }//GEN-LAST:event_app_btn_generate_balanceActionPerformed
@@ -1137,7 +1121,7 @@ public final class App extends javax.swing.JFrame {
             app_tbl_filter.setModel(tmVenta);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("No se pudo obtener la lista");
+            JOptionPane.showConfirmDialog(null, "No se pudo obtener la lista", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
     }//GEN-LAST:event_app_btn_filter_dateActionPerformed
 
@@ -1167,6 +1151,7 @@ public final class App extends javax.swing.JFrame {
             
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showConfirmDialog(null, "No se pudo agregar al carrito", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
 
 
@@ -1174,8 +1159,6 @@ public final class App extends javax.swing.JFrame {
 
     private void app_cb_store_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_cb_store_productActionPerformed
         // TODO add your handling code here:
-
-
     }//GEN-LAST:event_app_cb_store_productActionPerformed
 
     private void app_btn_add_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_add_userActionPerformed
@@ -1214,10 +1197,10 @@ public final class App extends javax.swing.JFrame {
             actualizarComboboxProductos();
             actualizarTablaProducto();
 
-            System.out.println("el update ocurrio correctamente");
+            JOptionPane.showConfirmDialog(null, "El producto a sido modificado correctamente", "Aceptar", JOptionPane.DEFAULT_OPTION);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("error al hacer upadte al producto");
+            JOptionPane.showConfirmDialog(null, "Error al modificar el producto", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
 
 
@@ -1247,6 +1230,7 @@ public final class App extends javax.swing.JFrame {
 
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showConfirmDialog(null, "Error, No se pudo filtrar por release", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
 
     }//GEN-LAST:event_app_txt_product_filterKeyReleased
@@ -1259,6 +1243,7 @@ public final class App extends javax.swing.JFrame {
             filtrarTabla(dato);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showConfirmDialog(null, "Error al filtrar la tabla", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
     }//GEN-LAST:event_app_btn_refresh_tbl_productActionPerformed
 
@@ -1270,6 +1255,7 @@ public final class App extends javax.swing.JFrame {
             app_lbl_store_price.setText(mensaje + ventas);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showConfirmDialog(null, "Error al refrescar la tabla", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
 
     }//GEN-LAST:event_app_btn_store_refresh_priceActionPerformed
@@ -1287,7 +1273,7 @@ public final class App extends javax.swing.JFrame {
             actualizarComboboxProductos();
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("error al cargar el combobox de nombre de productos");
+            JOptionPane.showConfirmDialog(null, "Error a cargar el ComboBox", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
 
     }//GEN-LAST:event_VentasComponentShown
@@ -1296,7 +1282,6 @@ public final class App extends javax.swing.JFrame {
         // TODO add your handling code here:
 
         CrearUsuario.setVisible(true);
-
     }//GEN-LAST:event_app_btn_store_create_userActionPerformed
 
     private void app_tbl_productMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_app_tbl_productMouseReleased
@@ -1317,6 +1302,7 @@ public final class App extends javax.swing.JFrame {
             app_txt_modify_product_description.setText(producto.getDescription());
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showConfirmDialog(null, "Error al agregar los campos", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
 
 

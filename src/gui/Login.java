@@ -271,11 +271,11 @@ public class Login extends javax.swing.JFrame {
     private void app_login_joinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_login_joinActionPerformed
         // Utiliza equals para comparar cadenas, no ==
         if (RUT.equals(app_login_rut.getText())) {
-            JOptionPane.showConfirmDialog(null, "Sessión verificada con exito", "Acpetar", JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showConfirmDialog(null, "Sessión verificada con exito", "Aceptar", JOptionPane.DEFAULT_OPTION);
             this.ocultarVentana();
             app.mostrarVentana();
         } else {
-            JOptionPane.showConfirmDialog(null, "Rut incorrecto", "Acpetar", JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showConfirmDialog(null, "Rut incorrecto", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
     }//GEN-LAST:event_app_login_joinActionPerformed
 
