@@ -88,8 +88,12 @@ public class DAOVenta implements DAO<Venta> {
     }
 
     public List<Venta> getAll(Date fecha_Start, Date fecha_end) throws SQLException {
-        String sql = "SELECT ventas.id,productos.nombre AS nombreProducto,users.nombre AS nombreUsuario,ventas.cantidad,ventas.fecha FROM "
-                + "ventas INNER JOIN productos ON ventas.producto_id_fk = productos.id "
+        String sql = "SELECT ventas.id,productos.nombre AS nombreProducto,"
+                + "users.nombre AS nombreUsuario,"
+                + "ventas.cantidad,"
+                + "ventas.fecha "
+                + "FROM ventas "
+                + "INNER JOIN productos ON ventas.producto_id_fk = productos.id "
                 + "INNER JOIN users ON ventas.user_id_fk = users.id WHERE fecha BETWEEN '" + fecha_Start + "' AND '" + fecha_end + "'";
         //System.out.println(sql);
         ResultSet rs = conn.execute(sql);
