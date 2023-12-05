@@ -24,6 +24,7 @@ public class Login extends javax.swing.JFrame {
     public Login(App app) {
         initComponents();
         setProperties();
+        app_login_rut.setText("1234");
         this.app = app;
         app.cerrarVentana();
     }

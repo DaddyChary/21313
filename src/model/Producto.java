@@ -23,6 +23,8 @@ public class Producto {
         this.Name = Name;
         this.price = price;
         this.description = description;
+        
+        
     }
 
     public int getId() {
@@ -61,7 +63,4 @@ public class Producto {
     public String toString() {
         return "Producto{" + "id=" + id + ", Name=" + Name + ", price=" + price + ", description=" + description + '}';
     }
-
-
-    
 }

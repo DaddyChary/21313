@@ -33,7 +33,7 @@ public final class App extends javax.swing.JFrame {
     /**
      * Creates new form Formulario
      */
-    public App() {
+    public App() throws SQLException {
         initComponents();
         setProperties();
 
@@ -43,11 +43,27 @@ public final class App extends javax.swing.JFrame {
         try {
             this.manager = new DAOManager();
 
+            TMProducto tMProducto = new TMProducto(manager.getdProducto().getAll());
+            app_tbl_product.setModel(tMProducto);
             //actualizarTablaProducto();
         } catch (SQLException ex) {
             System.out.println("Prende el XAMMP aweonao");
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
+
+        actualizarComboboxProductos();
+        //List<String> nombres;
+        /*try {
+            nombres = manager.getdProducto().getNameProducto();
+            for (String nombre : nombres ) {
+                System.out.println(nombre);
+                app_cb_product_modify.addItem(nombre);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("error al cargar el combobox de nombre de productos");
+            
+        }*/
 
     }
 
@@ -117,23 +133,17 @@ public final class App extends javax.swing.JFrame {
         app_tbl_product = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        app_cb_product_add = new javax.swing.JComboBox<>();
         app_txt_add_product_description = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         app_btn_add_product = new javax.swing.JToggleButton();
         jLabel3 = new javax.swing.JLabel();
         app_txt_modify_id_product = new javax.swing.JFormattedTextField();
-        app_cb_product_modify = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         app_txt_product_add_price = new javax.swing.JTextField();
-        jLabel6 = new javax.swing.JLabel();
-        app_txt_product_add_amount = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
         app_txt_modify_product_price = new javax.swing.JTextField();
-        app_txt_modify_product_amount = new javax.swing.JTextField();
         app_btn_modify_product = new javax.swing.JToggleButton();
         jLabel10 = new javax.swing.JLabel();
         app_txt_delete_id_product = new javax.swing.JTextField();
@@ -141,6 +151,9 @@ public final class App extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         app_txt_modify_product_description = new javax.swing.JTextField();
         txt_btn_clear_all = new javax.swing.JToggleButton();
+        app_txt_nombre_de_producto = new javax.swing.JTextField();
+        jLabel32 = new javax.swing.JLabel();
+        app_update_txt_name = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         app_txt_product_filter = new javax.swing.JTextField();
@@ -716,13 +729,6 @@ public final class App extends javax.swing.JFrame {
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel1.setText("Seleccione El Producto (Arbol,Decoracion)");
 
-        app_cb_product_add.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arbol de Navidad", "Bolas de Navidad ", "Luces de Navidad", "Estrella de Navidad", "Guirnaldas", "Adornos Colgantes", "Coronas Navideñas", "Figuras y decoraciones tematicas", "Velas Navideñas", "Centros de mesa" }));
-        app_cb_product_add.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                app_cb_product_addActionPerformed(evt);
-            }
-        });
-
         app_txt_add_product_description.setActionCommand("<Not Set>");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
@@ -739,22 +745,17 @@ public final class App extends javax.swing.JFrame {
         jLabel3.setText("Introduzca la ID del producto a modificar");
 
         app_txt_modify_id_product.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#"))));
-
-        app_cb_product_modify.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arbol de Navidad", "Bolas de Navidad ", "Luces de Navidad", "Estrella de Navidad", "Guirnaldas", "Adornos Colgantes", "Coronas Navideñas", "Figuras y decoraciones tematicas", "Velas Navideñas", "Centros de mesa" }));
-        app_cb_product_modify.addActionListener(new java.awt.event.ActionListener() {
+        app_txt_modify_id_product.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                app_cb_product_modifyActionPerformed(evt);
+                app_txt_modify_id_productActionPerformed(evt);
             }
         });
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel4.setText("Ingrese el nuevo producto ");
+        jLabel4.setText("Ingrese el nombre del producto");
 
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel5.setText("Ingrese el precio del producto");
-
-        jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel6.setText("Ingrese la cantidad del producto");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel7.setText("Descripcion del producto a modificar");
@@ -762,10 +763,12 @@ public final class App extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Ingrese el precio del producto");
 
-        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel9.setText("Ingrese la cantidad del producto");
-
         app_btn_modify_product.setText("Modificar Producto");
+        app_btn_modify_product.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                app_btn_modify_productActionPerformed(evt);
+            }
+        });
 
         jLabel10.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel10.setText("Ingrese la ID del producto a eliminar");
@@ -788,6 +791,21 @@ public final class App extends javax.swing.JFrame {
             }
         });
 
+        app_txt_nombre_de_producto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                app_txt_nombre_de_productoActionPerformed(evt);
+            }
+        });
+
+        jLabel32.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        jLabel32.setText("Ingrese el nombre del producto");
+
+        app_update_txt_name.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                app_update_txt_nameActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -795,41 +813,40 @@ public final class App extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(23, 23, 23)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(app_btn_modify_product, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 268, Short.MAX_VALUE)
                             .addComponent(app_txt_modify_id_product)
-                            .addComponent(app_cb_product_modify, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(app_txt_modify_product_price, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(app_txt_modify_product_amount))
+                            .addComponent(app_update_txt_name))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(app_txt_modify_product_description)
                             .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(app_cb_product_add, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(app_txt_product_add_price)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(app_txt_product_add_amount, javax.swing.GroupLayout.Alignment.TRAILING))
+                            .addComponent(app_txt_nombre_de_producto)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addComponent(jLabel32, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(app_txt_add_product_description)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(app_txt_delete_id_product)
                             .addComponent(app_btn_delete_product, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_btn_clear_all, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(app_btn_modify_product, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(app_btn_add_product, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -843,41 +860,37 @@ public final class App extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(app_cb_product_add, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addComponent(jLabel32)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(app_txt_nombre_de_producto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(27, 27, 27)
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(app_txt_product_add_price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(app_txt_product_add_amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(app_txt_product_add_price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(app_txt_add_product_description, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(app_btn_add_product)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(19, 19, 19)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(app_txt_modify_product_description, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(19, 19, 19))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(app_txt_modify_id_product, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(app_cb_product_modify, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel8)
-                        .addGap(7, 7, 7)
+                        .addComponent(app_update_txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
                         .addComponent(app_txt_modify_product_price, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel9)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(app_txt_modify_product_amount, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(app_txt_modify_product_description, javax.swing.GroupLayout.PREFERRED_SIZE, 204, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addComponent(app_btn_modify_product)
+                        .addGap(38, 38, 38)))
+                .addComponent(app_btn_modify_product, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(34, 34, 34)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -895,7 +908,13 @@ public final class App extends javax.swing.JFrame {
 
         jLabel12.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel12.setText("Filtrar por ID");
+        jLabel12.setText("Filtrar por Nombre");
+
+        app_txt_product_filter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                app_txt_product_filterKeyReleased(evt);
+            }
+        });
 
         app_btn_filter_product.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
         app_btn_filter_product.addActionListener(new java.awt.event.ActionListener() {
@@ -1022,20 +1041,38 @@ public final class App extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void app_cb_product_addActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_cb_product_addActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_app_cb_product_addActionPerformed
-
-    private void app_cb_product_modifyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_cb_product_modifyActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_app_cb_product_modifyActionPerformed
-
     private void app_btn_add_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_add_productActionPerformed
-        // TODO add your handling code here:
+        try {
+            // TODO add your handling code here:
+            Producto producto = new Producto();
+            producto.setName(app_txt_nombre_de_producto.getText());
+            producto.setPrice(Integer.parseInt(app_txt_product_add_price.getText()));
+            producto.setDescription(app_txt_add_product_description.getText());
+            manager.getdProducto().create(producto);
+            System.out.println("se agrego el producto");
+
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("error  al crear el producto");
+        }
+
+
     }//GEN-LAST:event_app_btn_add_productActionPerformed
 
     private void app_btn_delete_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_delete_productActionPerformed
-        // TODO add your handling code here:
+        try {
+            Producto producto = new Producto();
+
+            producto.setId(Integer.parseInt(app_txt_delete_id_product.getText()));
+
+            manager.getdProducto().delete(producto);
+
+            System.out.println("se elemino correctamente");
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("no se pudo eleminar el producto");
+        }
+
     }//GEN-LAST:event_app_btn_delete_productActionPerformed
 
     private void app_btn_filter_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_filter_productActionPerformed
@@ -1052,7 +1089,7 @@ public final class App extends javax.swing.JFrame {
 
     private void txt_btn_clear_allActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_btn_clear_allActionPerformed
         // TODO add your handling code here:
-        clearAll();
+
     }//GEN-LAST:event_txt_btn_clear_allActionPerformed
 
     private void app_menu_item_ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_menu_item_ventasActionPerformed
@@ -1083,10 +1120,10 @@ public final class App extends javax.swing.JFrame {
         try {
             //manager.getdVenta().getTotalVentas(fechaStart, fechaEnd);
             JOptionPane.showConfirmDialog(null, "El Balance total de las ventas entre las fechas "
-                    +fechaStartFormateada+ " y " +fechaEndFormateada+" es:"
-                    +""+manager.getdVenta().getTotalVentas(fechaStart, fechaEnd), 
+                    + fechaStartFormateada + " y " + fechaEndFormateada + " es:"
+                    + "" + manager.getdVenta().getTotalVentas(fechaStart, fechaEnd),
                     "Acpetar", JOptionPane.DEFAULT_OPTION);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("No se pudo obtener el balance");
@@ -1145,23 +1182,73 @@ public final class App extends javax.swing.JFrame {
     private void app_btn_add_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_add_userActionPerformed
         try {
             // TODO add your handling code here:
-            
+
             Usuario usuario = new Usuario();
-            
+
             usuario.setName(app_add_user_name.getText());
             usuario.setRut(app_add_user_rut.getText());
 
             manager.getdUser().create(usuario);
             JOptionPane.showConfirmDialog(null, "Usuario creado correctamente", "Acpetar", JOptionPane.DEFAULT_OPTION);
-            
-            
-          
+
         } catch (SQLException ex) {
             JOptionPane.showConfirmDialog(null, "El usuario ya existe", "Acpetar", JOptionPane.DEFAULT_OPTION);
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
+
     }//GEN-LAST:event_app_btn_add_userActionPerformed
+
+    private void app_txt_nombre_de_productoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_txt_nombre_de_productoActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_app_txt_nombre_de_productoActionPerformed
+
+    private void app_btn_modify_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_modify_productActionPerformed
+        try {
+            Producto producto = new Producto();
+
+            producto.setId(Integer.parseInt(app_txt_modify_id_product.getText()));
+            producto.setName(app_update_txt_name.getText());
+            producto.setPrice(Integer.parseInt(app_txt_modify_product_price.getText()));
+            producto.setDescription(app_txt_modify_product_description.getText());
+
+            manager.getdProducto().update(producto);
+            actualizarComboboxProductos();
+
+            System.out.println("el update ocurrio correctamente");
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("error al hacer upadte al producto");
+        }
+
+
+    }//GEN-LAST:event_app_btn_modify_productActionPerformed
+
+    private void app_update_txt_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_update_txt_nameActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_app_update_txt_nameActionPerformed
+
+    private void app_txt_modify_id_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_txt_modify_id_productActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_app_txt_modify_id_productActionPerformed
+
+    private void app_txt_product_filterKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_app_txt_product_filterKeyReleased
+        try {
+            // TODO add your handling code here:
+            /*tengo un componente grafico donde puedo obtener un dato
+            que quiero hacer : quiero que cuando la tecla se suelte se haga una consulta a base de datos con el dato
+            necesito entregarle a la consulta sql el dato del componente grafico
+            rescatar dato
+            necesito que se actualize la tabla
+             */
+            String dato = app_txt_product_filter.getText();
+            filtrarTabla(dato);
+            //en la lista esta ammount : Producto{id=5, Name=xzt, price=102, description=Ejemplo, amount=0}]
+
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }//GEN-LAST:event_app_txt_product_filterKeyReleased
 
     /**
      * @param args the command line arguments
@@ -1184,7 +1271,11 @@ public final class App extends javax.swing.JFrame {
         //</editor-fold>
 
         java.awt.EventQueue.invokeLater(() -> {
-            new App();
+            try {
+                new App();
+            } catch (SQLException ex) {
+                Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            }
         });
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1206,8 +1297,6 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JToggleButton app_btn_store_refresh_price;
     private com.toedter.calendar.JDateChooser app_calendar_filter_end;
     private com.toedter.calendar.JDateChooser app_calendar_filter_start;
-    private javax.swing.JComboBox<String> app_cb_product_add;
-    private javax.swing.JComboBox<String> app_cb_product_modify;
     private javax.swing.JComboBox<String> app_cb_store_product;
     private javax.swing.JMenuItem app_menu_item_filter;
     private javax.swing.JMenuItem app_menu_item_user;
@@ -1217,14 +1306,14 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JTextField app_txt_add_product_description;
     private javax.swing.JTextField app_txt_delete_id_product;
     private javax.swing.JFormattedTextField app_txt_modify_id_product;
-    private javax.swing.JTextField app_txt_modify_product_amount;
     private javax.swing.JTextField app_txt_modify_product_description;
     private javax.swing.JTextField app_txt_modify_product_price;
-    private javax.swing.JTextField app_txt_product_add_amount;
+    private javax.swing.JTextField app_txt_nombre_de_producto;
     private javax.swing.JTextField app_txt_product_add_price;
     private javax.swing.JTextField app_txt_product_filter;
     private javax.swing.JTextField app_txt_store_amount;
     private javax.swing.JTextField app_txt_store_rut;
+    private javax.swing.JTextField app_update_txt_name;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1250,12 +1339,11 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
+    private javax.swing.JLabel jLabel32;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JPanel jPanel1;
@@ -1281,21 +1369,16 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JToggleButton txt_btn_clear_all;
     // End of variables declaration//GEN-END:variables
 
-    public void clearAll() {
-        app_txt_product_add_price.setText("");
-        app_txt_product_add_amount.setText("");
-        app_txt_add_product_description.setText("");
-        app_txt_modify_id_product.setText("");
-        app_txt_modify_product_description.setText("");
-        app_txt_modify_product_price.setText("");
-        app_txt_modify_product_amount.setText("");
-        app_txt_delete_id_product.setText("");
-        app_txt_product_filter.setText("");
-    }
-
     public void actualizarTablaProducto() throws SQLException {
         DAOProducto dao = manager.getdProducto();
         List<Producto> lista = dao.getAll();
+        TMProducto tmProducto = new TMProducto(lista);
+        app_tbl_product.setModel(tmProducto);
+    }
+
+    public void filtrarTabla(String dato) throws SQLException {
+        DAOProducto dao = manager.getdProducto();
+        List<Producto> lista = dao.getAll(dato);
         TMProducto tmProducto = new TMProducto(lista);
         app_tbl_product.setModel(tmProducto);
     }
@@ -1318,6 +1401,23 @@ public final class App extends javax.swing.JFrame {
         this.setTitle("Formulario");
         this.setLocationRelativeTo(null);
         this.cerrarVentana();
+    }
+
+    public void actualizarComboboxProductos() throws SQLException {
+
+        List<String> nombres;
+        try {
+            nombres = manager.getdProducto().getNameProducto();
+            for (String nombre : nombres) {
+                System.out.println(nombre);
+                //app_cb_product_modify.addItem(nombre);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("error al cargar el combobox de nombre de productos");
+
+        }
+
     }
 
 }

@@ -22,6 +22,7 @@ public class Venta {
     private int userID;
     private int amount;
     private Date fecha;
+    
 
     public Venta() {
     }

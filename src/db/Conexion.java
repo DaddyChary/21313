@@ -41,7 +41,7 @@ public class Conexion {
 
     public static Conexion getConexion() throws SQLException {
         if (conexion == null) {
-            conexion = new Conexion("Navidad");
+            conexion = new Conexion("navidad");
         }
         return conexion;
     }
