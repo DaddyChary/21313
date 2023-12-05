@@ -27,7 +27,8 @@ public class DAOVenta implements DAO<Venta> {
 
     @Override
     public void create(Venta t) throws SQLException {
-        String sql = "INSERT INTO ventas (id, producto_id_fk, user_id_fk, cantidad, fecha) VALUES (null, " + t.getProductID() + ", " + t.getUserID() + "," + t.getAmount() + ", NOW())";
+        String sql = "INSERT INTO ventas (id, producto_id_fk, user_id_fk, cantidad, fecha) VALUES (null, "
+                + t.getProductID() + ", " + t.getUserID() + "," + t.getAmount() + ", NOW())";
         conn.execute(sql);
     }
 
@@ -111,7 +112,7 @@ public class DAOVenta implements DAO<Venta> {
         return listaVenta;
     }
 
-    public int getTotalVentas(Date fecha_Start, Date fecha_end) throws SQLException {
+    public int getTotalVentasPorFecha(Date fecha_Start, Date fecha_end) throws SQLException {
         String sql = "SELECT SUM(precio * cantidad) AS total_ventas FROM ventas INNER JOIN productos "
                 + "ON ventas.producto_id_fk = productos.id WHERE fecha BETWEEN '" + fecha_Start + "' AND '" + fecha_end + "';";
         //System.out.println(sql);
@@ -129,4 +130,22 @@ public class DAOVenta implements DAO<Venta> {
 
     }
 
+        public int getTotalVentas() throws SQLException {
+        String sql = "SELECT SUM(precio * cantidad) AS total_ventas FROM ventas INNER JOIN productos "
+                + "ON ventas.producto_id_fk = productos.id;";
+        //System.out.println(sql);
+        ResultSet rs = conn.execute(sql);
+
+        int ventaTotal = 0;
+
+        while (rs.next()) {
+
+            ventaTotal = (rs.getInt("total_ventas"));
+
+        }
+        conn.close();
+        return ventaTotal;
+
+    }
+    
 }

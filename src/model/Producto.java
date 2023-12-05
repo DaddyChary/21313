@@ -30,6 +30,10 @@ public class Producto {
     public int getId() {
         return id;
     }
+    
+    public String getIdString() {
+        return String.valueOf(id);
+    }
 
     public void setId(int id) {
         this.id = id;
@@ -47,6 +51,10 @@ public class Producto {
         return price;
     }
 
+    public String getPriceString() {
+        return String.valueOf(price);
+    }    
+    
     public void setPrice(int price) {
         this.price = price;
     }

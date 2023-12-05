@@ -28,13 +28,15 @@ public class DAOProducto implements DAO<Producto> {
 
     @Override
     public void create(Producto t) throws SQLException {
-        String sql = "INSERT INTO productos (id, nombre, precio, descripcion) VALUES (null, '" + t.getName() + "', " + t.getPrice() + ",'" + t.getDescription() + "');";
+        String sql = "INSERT INTO productos (id, nombre, precio, descripcion) VALUES (null, '" 
+                + t.getName() + "', " + t.getPrice() + ",'" + t.getDescription() + "');";
         conn.execute(sql);
     }
 
     @Override
     public void update(Producto t) throws SQLException {
-        String sql = "UPDATE productos SET precio = " + t.getPrice() + ", nombre= '" + t.getName() + "',descripcion = '" + t.getDescription() + "' WHERE id = " + t.getId() + "";
+        String sql = "UPDATE productos SET precio = " + t.getPrice() + ", nombre= '" + t.getName()
+                + "',descripcion = '" + t.getDescription() + "' WHERE id = " + t.getId() + "";
         conn.execute(sql);
     }
 
@@ -94,9 +96,9 @@ public class DAOProducto implements DAO<Producto> {
         conn.close();
         return listaNombreProductos;
     }
-    
+
     public List<Producto> getAll(String dato) throws SQLException {
-        String sql = "SELECT * FROM productos WHERE nombre LIKE '%"+ dato +"%'";
+        String sql = "SELECT * FROM productos WHERE nombre LIKE '%" + dato + "%'";
         //System.out.println(sql);
         ResultSet rs = conn.execute(sql);
 
@@ -116,5 +118,33 @@ public class DAOProducto implements DAO<Producto> {
         return listaProductos;
 
     }
-    
+
+    public Producto getOne(String datoCb) throws SQLException {
+        String sql = "SELECT * FROM productos WHERE nombre ='" + datoCb + "'";
+        ResultSet rs = conn.execute(sql);
+        Producto producto = new Producto();
+        if (rs.next()) {
+            producto.setId(rs.getInt("id"));
+            producto.setName(rs.getString("nombre"));
+            producto.setPrice(rs.getInt("precio"));
+            producto.setDescription(rs.getString("descripcion"));
+        }
+        conn.close();
+        return producto;
+    }
+
+    public Producto getOnePrecio(int precio) throws SQLException {
+        String sql = "SELECT * FROM productos WHERE precio =" + precio + "";
+        ResultSet rs = conn.execute(sql);
+        Producto producto = new Producto();
+        if (rs.next()) {
+            producto.setId(rs.getInt("id"));
+            producto.setName(rs.getString("nombre"));
+            producto.setPrice(rs.getInt("precio"));
+            producto.setDescription(rs.getString("descripcion"));
+        }
+        conn.close();
+        return producto;
+    }
+
 }

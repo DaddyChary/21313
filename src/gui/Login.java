@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  */
 public class Login extends javax.swing.JFrame {
 
-    private final String RUT = "1234";
+    private final String RUT = "12345";
     private final App app;
 
     /**
@@ -24,7 +24,7 @@ public class Login extends javax.swing.JFrame {
     public Login(App app) {
         initComponents();
         setProperties();
-        app_login_rut.setText("1234");
+        //app_login_rut.setText("12345");
         this.app = app;
         app.cerrarVentana();
     }
@@ -167,6 +167,12 @@ public class Login extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("Ingrese Su Rut");
 
+        app_login_rut.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                app_login_rutActionPerformed(evt);
+            }
+        });
+
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ciervo.png"))); // NOI18N
 
@@ -276,6 +282,10 @@ public class Login extends javax.swing.JFrame {
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         
     }//GEN-LAST:event_formWindowClosing
+
+    private void app_login_rutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_login_rutActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_app_login_rutActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JToggleButton app_login_join;

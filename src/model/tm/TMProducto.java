@@ -4,7 +4,10 @@
  */
 package model.tm;
 
+import java.util.EventListener;
 import java.util.List;
+import javax.swing.event.TableModelEvent;
+import javax.swing.event.TableModelListener;
 import javax.swing.table.AbstractTableModel;
 import model.Producto;
 
@@ -65,4 +68,7 @@ public class TMProducto extends AbstractTableModel{
         };
     }
     
+   public Producto getSelectedProduct (){
+       return new Producto(1, "palito", 12, "canela");
+   }
 }

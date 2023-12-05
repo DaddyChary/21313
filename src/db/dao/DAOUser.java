@@ -33,7 +33,8 @@ public class DAOUser implements DAO<Usuario> {
 
     @Override
     public void update(Usuario t) throws SQLException {
-        String sql = "UPDATE users SET id ='" + t.getId() + "',nombre='" + t.getName() + "',rut='" + t.getRut() + "' WHERE id = '" + t.getId() + "'";
+        String sql = "UPDATE users SET id ='" + t.getId() + "',nombre='"
+                + t.getName() + "',rut='" + t.getRut() + "' WHERE id = '" + t.getId() + "'";
         conn.execute(sql);
     }
 

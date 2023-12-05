@@ -7,6 +7,8 @@ package gui;
 import db.dao.DAOManager;
 import db.dao.DAOProducto;
 import db.dao.DAOVenta;
+import java.awt.Dimension;
+import java.awt.Toolkit;
 import model.Producto;
 import model.tm.TMProducto;
 import java.sql.SQLException;
@@ -15,6 +17,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.SwingConstants;
 import model.Usuario;
@@ -152,7 +155,7 @@ public final class App extends javax.swing.JFrame {
         app_txt_modify_product_description = new javax.swing.JTextField();
         app_txt_nombre_de_producto = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
-        app_update_txt_name = new javax.swing.JTextField();
+        app_txt_modify_name = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         app_txt_product_filter = new javax.swing.JTextField();
@@ -719,6 +722,11 @@ public final class App extends javax.swing.JFrame {
 
             }
         ));
+        app_tbl_product.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                app_tbl_productMouseReleased(evt);
+            }
+        });
         jScrollPane1.setViewportView(app_tbl_product);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
@@ -804,9 +812,9 @@ public final class App extends javax.swing.JFrame {
         jLabel32.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel32.setText("Ingrese el nombre del producto");
 
-        app_update_txt_name.addActionListener(new java.awt.event.ActionListener() {
+        app_txt_modify_name.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                app_update_txt_nameActionPerformed(evt);
+                app_txt_modify_nameActionPerformed(evt);
             }
         });
 
@@ -825,7 +833,7 @@ public final class App extends javax.swing.JFrame {
                             .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(app_txt_modify_product_price, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(app_update_txt_name))
+                            .addComponent(app_txt_modify_name))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(app_txt_modify_product_description)
@@ -887,7 +895,7 @@ public final class App extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(app_update_txt_name, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(app_txt_modify_name, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -1064,6 +1072,8 @@ public final class App extends javax.swing.JFrame {
 
             manager.getdProducto().delete(producto);
 
+            actualizarTablaProducto();
+
             System.out.println("se elemino correctamente");
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
@@ -1075,7 +1085,7 @@ public final class App extends javax.swing.JFrame {
     private void app_menu_item_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_menu_item_filterActionPerformed
         // TODO add your handling code here:
         this.FilterDate.setVisible(true);
-        
+
     }//GEN-LAST:event_app_menu_item_filterActionPerformed
 
     private void app_menu_item_ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_menu_item_ventasActionPerformed
@@ -1101,7 +1111,7 @@ public final class App extends javax.swing.JFrame {
             //manager.getdVenta().getTotalVentas(fechaStart, fechaEnd);
             JOptionPane.showConfirmDialog(null, "El Balance total de las ventas entre las fechas "
                     + fechaStartFormateada + " y " + fechaEndFormateada + " es:"
-                    + "" + manager.getdVenta().getTotalVentas(fechaStart, fechaEnd),
+                    + "" + manager.getdVenta().getTotalVentasPorFecha(fechaStart, fechaEnd),
                     "Acpetar", JOptionPane.DEFAULT_OPTION);
 
         } catch (SQLException ex) {
@@ -1119,7 +1129,7 @@ public final class App extends javax.swing.JFrame {
         Date fechaStart = Date.valueOf(fechaStartFormateada);
         Date fechaEnd = Date.valueOf(fechaEndFormateada);
 
-        System.out.println(fechaStartFormateada + " - " + fechaEndFormateada);
+        //System.out.println(fechaStartFormateada + " - " + fechaEndFormateada);
         try {
             List<Venta> lista = manager.getdVenta().getAll(fechaStart, fechaEnd);
             TMVenta tmVenta = new TMVenta(lista);
@@ -1132,22 +1142,28 @@ public final class App extends javax.swing.JFrame {
 
     private void app_btn_store_add_trolleyActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_store_add_trolleyActionPerformed
 
+        String datoCb = app_cb_store_product.getSelectedItem().toString();
+        //System.out.println(datoCb);
+        Venta venta = new Venta();
+        Producto producto;
+        Usuario usuario;
         try {
 
-            int id = app_cb_store_product.getSelectedIndex();
-            Producto producto;
-            producto = manager.getdProducto().getOne(id);
+            producto = manager.getdProducto().getOne(datoCb);
+            //System.out.println(producto);
 
-            Usuario user = manager.getdUser().getOne(app_txt_store_rut.getText());
+            usuario = manager.getdUser().getOne(app_txt_store_rut.getText());
 
-            Venta venta = new Venta();
+            int amount = Integer.parseInt(app_txt_store_amount.getText());
 
             venta.setProductID(producto.getId());
-            venta.setUserID(user.getId());
-            venta.setAmount(Integer.parseInt(app_txt_store_amount.getText()));
+            venta.setUserID(usuario.getId());
+            venta.setAmount(amount);
             //System.out.println(venta);
             manager.getdVenta().create(venta);
-
+            
+            JOptionPane.showConfirmDialog(null, "Agregado al carrito con exito", "Acpetar", JOptionPane.DEFAULT_OPTION);
+            
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1189,12 +1205,13 @@ public final class App extends javax.swing.JFrame {
             Producto producto = new Producto();
 
             producto.setId(Integer.parseInt(app_txt_modify_id_product.getText()));
-            producto.setName(app_update_txt_name.getText());
+            producto.setName(app_txt_modify_name.getText());
             producto.setPrice(Integer.parseInt(app_txt_modify_product_price.getText()));
             producto.setDescription(app_txt_modify_product_description.getText());
 
             manager.getdProducto().update(producto);
             actualizarComboboxProductos();
+            actualizarTablaProducto();
 
             System.out.println("el update ocurrio correctamente");
         } catch (SQLException ex) {
@@ -1205,9 +1222,9 @@ public final class App extends javax.swing.JFrame {
 
     }//GEN-LAST:event_app_btn_modify_productActionPerformed
 
-    private void app_update_txt_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_update_txt_nameActionPerformed
+    private void app_txt_modify_nameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_txt_modify_nameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_app_update_txt_nameActionPerformed
+    }//GEN-LAST:event_app_txt_modify_nameActionPerformed
 
     private void app_txt_modify_id_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_txt_modify_id_productActionPerformed
         // TODO add your handling code here:
@@ -1244,8 +1261,14 @@ public final class App extends javax.swing.JFrame {
     }//GEN-LAST:event_app_btn_refresh_tbl_productActionPerformed
 
     private void app_btn_store_refresh_priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_store_refresh_priceActionPerformed
-        // TODO add your handling code here:
-
+        String mensaje = "Total Ventas: ";
+        try {
+            // TODO add your handling code here:
+            int ventas = manager.getdVenta().getTotalVentas();
+            app_lbl_store_price.setText(mensaje + ventas);
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }//GEN-LAST:event_app_btn_store_refresh_priceActionPerformed
 
@@ -1274,6 +1297,29 @@ public final class App extends javax.swing.JFrame {
         CrearUsuario.setVisible(true);
 
     }//GEN-LAST:event_app_btn_store_create_userActionPerformed
+
+    private void app_tbl_productMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_app_tbl_productMouseReleased
+        try {
+            // TODO add your handling code here:
+            int dato = app_tbl_product.getSelectedRow();
+
+            System.out.println(dato);
+
+            Object id = app_tbl_product.getValueAt(dato, 0);
+            System.out.println(id.toString());
+
+            Producto producto = manager.getdProducto().getOne(Integer.parseInt(id.toString()));
+            System.out.println(producto);
+            app_txt_modify_id_product.setText(producto.getIdString());
+            app_txt_modify_name.setText(producto.getName());
+            app_txt_modify_product_price.setText(producto.getPriceString());
+            app_txt_modify_product_description.setText(producto.getDescription());
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+
+    }//GEN-LAST:event_app_tbl_productMouseReleased
 
     /**
      * @param args the command line arguments
@@ -1331,6 +1377,7 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JTextField app_txt_add_product_description;
     private javax.swing.JTextField app_txt_delete_id_product;
     private javax.swing.JFormattedTextField app_txt_modify_id_product;
+    private javax.swing.JTextField app_txt_modify_name;
     private javax.swing.JTextField app_txt_modify_product_description;
     private javax.swing.JTextField app_txt_modify_product_price;
     private javax.swing.JTextField app_txt_nombre_de_producto;
@@ -1338,7 +1385,6 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JTextField app_txt_product_filter;
     private javax.swing.JTextField app_txt_store_amount;
     private javax.swing.JTextField app_txt_store_rut;
-    private javax.swing.JTextField app_update_txt_name;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1422,17 +1468,16 @@ public final class App extends javax.swing.JFrame {
 
     private void setProperties() {
         this.setTitle("Formulario");
-        this.setLocationRelativeTo(null);
-        this.cerrarVentana();
-        //this.CrearUsuario.setLocationRelativeTo(null);
-        this.CrearUsuario.setSize(450, 380);
         this.CrearUsuario.setTitle("CrearUsuario");
-        //this.Ventas.setLocationRelativeTo(null);
-        this.Ventas.setSize(450, 660);
         this.Ventas.setTitle("Ventas");
-        this.FilterDate.setLocationRelativeTo(this);
-        this.FilterDate.setSize(1128, 840);
         this.FilterDate.setTitle("FilterDate");
+        this.CrearUsuario.setSize(450, 380);
+        this.Ventas.setSize(450, 660);
+        this.FilterDate.setSize(1128, 840);
+        centerWindow(this);
+        centerWindow(Ventas);
+        centerWindow(FilterDate);
+        centerWindow(CrearUsuario);
     }
 
     public void actualizarComboboxProductos() throws SQLException {
@@ -1440,9 +1485,16 @@ public final class App extends javax.swing.JFrame {
         List<String> nombres;
         nombres = manager.getdProducto().getNameProducto();
         for (String nombre : nombres) {
-            System.out.println(nombre);
+            //System.out.println(nombre);
             app_cb_store_product.addItem(nombre);
         }
+    }
+
+    private static void centerWindow(JFrame frame) {
+        Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
+        int x = (screenSize.width - frame.getWidth()) / 2;
+        int y = (screenSize.height - frame.getHeight()) / 2;
+        frame.setLocation(x, y);
     }
 
 }

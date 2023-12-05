@@ -1028,6 +1028,9 @@
                       <TableHeader reorderingAllowed="true" resizingAllowed="true"/>
                     </Property>
                   </Properties>
+                  <Events>
+                    <EventHandler event="mouseReleased" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="app_tbl_productMouseReleased"/>
+                  </Events>
                 </Component>
               </SubComponents>
             </Container>
@@ -1049,7 +1052,7 @@
                                   <Component id="jLabel4" alignment="1" max="32767" attributes="0"/>
                                   <Component id="jLabel8" alignment="1" max="32767" attributes="0"/>
                                   <Component id="app_txt_modify_product_price" alignment="1" max="32767" attributes="0"/>
-                                  <Component id="app_update_txt_name" max="32767" attributes="0"/>
+                                  <Component id="app_txt_modify_name" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="32767" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -1127,7 +1130,7 @@
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel4" min="-2" pref="22" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                              <Component id="app_update_txt_name" min="-2" pref="28" max="-2" attributes="0"/>
+                              <Component id="app_txt_modify_name" min="-2" pref="28" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" pref="20" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
@@ -1286,9 +1289,9 @@
                 <Property name="text" type="java.lang.String" value="Ingrese el nombre del producto"/>
               </Properties>
             </Component>
-            <Component class="javax.swing.JTextField" name="app_update_txt_name">
+            <Component class="javax.swing.JTextField" name="app_txt_modify_name">
               <Events>
-                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="app_update_txt_nameActionPerformed"/>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="app_txt_modify_nameActionPerformed"/>
               </Events>
             </Component>
           </SubComponents>
