@@ -1054,6 +1054,7 @@ public final class App extends javax.swing.JFrame {
             producto.setPrice(Integer.parseInt(app_txt_product_add_price.getText()));
             producto.setDescription(app_txt_add_product_description.getText());
             manager.getdProducto().create(producto);
+            actualizarTablaProducto();
             System.out.println("se agrego el producto");
 
         } catch (SQLException ex) {
@@ -1239,6 +1240,7 @@ public final class App extends javax.swing.JFrame {
             rescatar dato
             necesito que se actualize la tabla
              */
+            
             String dato = app_txt_product_filter.getText();
             filtrarTabla(dato);
             //en la lista esta ammount : Producto{id=5, Name=xzt, price=102, description=Ejemplo, amount=0}]
@@ -1283,7 +1285,6 @@ public final class App extends javax.swing.JFrame {
             // TODO add your handling code here:
 
             actualizarComboboxProductos();
-            System.out.println("hola");
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             System.out.println("error al cargar el combobox de nombre de productos");
@@ -1303,13 +1304,13 @@ public final class App extends javax.swing.JFrame {
             // TODO add your handling code here:
             int dato = app_tbl_product.getSelectedRow();
 
-            System.out.println(dato);
+            //System.out.println(dato);
 
             Object id = app_tbl_product.getValueAt(dato, 0);
-            System.out.println(id.toString());
+            //System.out.println(id.toString());
 
             Producto producto = manager.getdProducto().getOne(Integer.parseInt(id.toString()));
-            System.out.println(producto);
+            //System.out.println(producto);
             app_txt_modify_id_product.setText(producto.getIdString());
             app_txt_modify_name.setText(producto.getName());
             app_txt_modify_product_price.setText(producto.getPriceString());
