@@ -44,12 +44,12 @@ public final class App extends javax.swing.JFrame {
         login.mostrarVentana();
 
         try {
-            
+
             this.manager = new DAOManager();
-            
+
             TMProducto tMProducto = new TMProducto(manager.getdProducto().getAll());
             app_tbl_product.setModel(tMProducto);
-            
+
         } catch (SQLException ex) {
             JOptionPane.showConfirmDialog(null, "Enciende el Xammp", "Aceptar", JOptionPane.DEFAULT_OPTION);
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
@@ -218,6 +218,11 @@ public final class App extends javax.swing.JFrame {
         app_calendar_filter_start.setDateFormatString("yyyy-MM-dd");
 
         app_calendar_filter_end.setDateFormatString("yyyy-MM-dd");
+        app_calendar_filter_end.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                app_calendar_filter_endKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel9Layout = new javax.swing.GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
@@ -241,7 +246,7 @@ public final class App extends javax.swing.JFrame {
                 .addComponent(app_calendar_filter_start, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel15)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 8, Short.MAX_VALUE)
                 .addComponent(app_calendar_filter_end, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(11, 11, 11))
         );
@@ -1038,7 +1043,12 @@ public final class App extends javax.swing.JFrame {
             // TODO add your handling code here:
             Producto producto = new Producto();
             producto.setName(app_txt_nombre_de_producto.getText());
-            producto.setPrice(Integer.parseInt(app_txt_product_add_price.getText()));
+            try {
+                producto.setPrice(Integer.parseInt(app_txt_product_add_price.getText()));
+            } catch (NumberFormatException e) {
+                JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
+                return;
+            }
             producto.setDescription(app_txt_add_product_description.getText());
             manager.getdProducto().create(producto);
             actualizarTablaProducto();
@@ -1047,16 +1057,21 @@ public final class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showConfirmDialog(null, "Error al agregar el producto", "Aceptar", JOptionPane.DEFAULT_OPTION);
-        } 
+        }
 
 
     }//GEN-LAST:event_app_btn_add_productActionPerformed
 
     private void app_btn_delete_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_delete_productActionPerformed
         try {
-            
+
             Producto producto = new Producto();
-            producto.setId(Integer.parseInt(app_txt_delete_id_product.getText()));
+            try {
+                producto.setId(Integer.parseInt(app_txt_delete_id_product.getText()));
+            } catch (NumberFormatException e) {
+                JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
+                return;
+            }
             manager.getdProducto().delete(producto);
             actualizarTablaProducto();
 
@@ -1085,6 +1100,7 @@ public final class App extends javax.swing.JFrame {
 
     private void app_btn_generate_balanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_generate_balanceActionPerformed
         // TODO add your handling code here:
+
         SimpleDateFormat formato_start = new SimpleDateFormat(app_calendar_filter_start.getDateFormatString());
         SimpleDateFormat formato_end = new SimpleDateFormat(app_calendar_filter_end.getDateFormatString());
         String fechaStartFormateada = formato_start.format(app_calendar_filter_start.getDate());
@@ -1138,17 +1154,20 @@ public final class App extends javax.swing.JFrame {
             //System.out.println(producto);
 
             usuario = manager.getdUser().getOne(app_txt_store_rut.getText());
+            try {
 
-            int amount = Integer.parseInt(app_txt_store_amount.getText());
-
-            venta.setProductID(producto.getId());
-            venta.setUserID(usuario.getId());
-            venta.setAmount(amount);
-            //System.out.println(venta);
-            manager.getdVenta().create(venta);
-            
+                int amount = Integer.parseInt(app_txt_store_amount.getText());
+                venta.setProductID(producto.getId());
+                venta.setUserID(usuario.getId());
+                venta.setAmount(amount);
+                //System.out.println(venta);
+                manager.getdVenta().create(venta);
+            } catch (NumberFormatException e) {
+                JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
+                return;
+            }
             JOptionPane.showConfirmDialog(null, "Agregado al carrito con exito", "Acpetar", JOptionPane.DEFAULT_OPTION);
-            
+
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showConfirmDialog(null, "No se pudo agregar al carrito", "Aceptar", JOptionPane.DEFAULT_OPTION);
@@ -1188,9 +1207,14 @@ public final class App extends javax.swing.JFrame {
         try {
             Producto producto = new Producto();
 
-            producto.setId(Integer.parseInt(app_txt_modify_id_product.getText()));
+            try {
+                producto.setId(Integer.parseInt(app_txt_modify_id_product.getText()));
+                producto.setPrice(Integer.parseInt(app_txt_modify_product_price.getText()));
+            } catch (NumberFormatException e) {
+                JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
+                return;
+            }
             producto.setName(app_txt_modify_name.getText());
-            producto.setPrice(Integer.parseInt(app_txt_modify_product_price.getText()));
             producto.setDescription(app_txt_modify_product_description.getText());
 
             manager.getdProducto().update(producto);
@@ -1223,7 +1247,7 @@ public final class App extends javax.swing.JFrame {
             rescatar dato
             necesito que se actualize la tabla
              */
-            
+
             String dato = app_txt_product_filter.getText();
             filtrarTabla(dato);
             //en la lista esta ammount : Producto{id=5, Name=xzt, price=102, description=Ejemplo, amount=0}]
@@ -1251,8 +1275,13 @@ public final class App extends javax.swing.JFrame {
         String mensaje = "Total Ventas: ";
         try {
             // TODO add your handling code here:
-            int ventas = manager.getdVenta().getTotalVentas();
-            app_lbl_store_price.setText(mensaje + ventas);
+            try {
+                int ventas = manager.getdVenta().getTotalVentas();
+                app_lbl_store_price.setText(mensaje + ventas);
+            } catch (NumberFormatException e) {
+                JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
+                return;
+            }
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showConfirmDialog(null, "Error al refrescar la tabla", "Aceptar", JOptionPane.DEFAULT_OPTION);
@@ -1287,19 +1316,23 @@ public final class App extends javax.swing.JFrame {
     private void app_tbl_productMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_app_tbl_productMouseReleased
         try {
             // TODO add your handling code here:
-            int dato = app_tbl_product.getSelectedRow();
+
+            try {
+                int dato = app_tbl_product.getSelectedRow();
+                Object id = app_tbl_product.getValueAt(dato, 0);
+                Producto producto = manager.getdProducto().getOne(Integer.parseInt(id.toString()));
+                app_txt_modify_id_product.setText(producto.getIdString());
+                app_txt_modify_name.setText(producto.getName());
+                app_txt_modify_product_price.setText(producto.getPriceString());
+                app_txt_modify_product_description.setText(producto.getDescription());
+            } catch (NumberFormatException e) {
+                JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
+                return;
+            }
 
             //System.out.println(dato);
-
-            Object id = app_tbl_product.getValueAt(dato, 0);
             //System.out.println(id.toString());
-
-            Producto producto = manager.getdProducto().getOne(Integer.parseInt(id.toString()));
             //System.out.println(producto);
-            app_txt_modify_id_product.setText(producto.getIdString());
-            app_txt_modify_name.setText(producto.getName());
-            app_txt_modify_product_price.setText(producto.getPriceString());
-            app_txt_modify_product_description.setText(producto.getDescription());
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showConfirmDialog(null, "Error al agregar los campos", "Aceptar", JOptionPane.DEFAULT_OPTION);
@@ -1307,6 +1340,11 @@ public final class App extends javax.swing.JFrame {
 
 
     }//GEN-LAST:event_app_tbl_productMouseReleased
+
+    private void app_calendar_filter_endKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_app_calendar_filter_endKeyTyped
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_app_calendar_filter_endKeyTyped
 
     /**
      * @param args the command line arguments
