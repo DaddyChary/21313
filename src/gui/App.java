@@ -113,7 +113,7 @@ public final class App extends javax.swing.JFrame {
         jLabel26 = new javax.swing.JLabel();
         app_btn_store_create_user = new javax.swing.JToggleButton();
         jPanel18 = new javax.swing.JPanel();
-        jLabel29 = new javax.swing.JLabel();
+        app_lbl_store_price = new javax.swing.JLabel();
         app_btn_store_refresh_price = new javax.swing.JToggleButton();
         jLabel30 = new javax.swing.JLabel();
         CrearUsuario = new javax.swing.JFrame();
@@ -150,14 +150,12 @@ public final class App extends javax.swing.JFrame {
         app_btn_delete_product = new javax.swing.JToggleButton();
         jLabel11 = new javax.swing.JLabel();
         app_txt_modify_product_description = new javax.swing.JTextField();
-        txt_btn_clear_all = new javax.swing.JToggleButton();
         app_txt_nombre_de_producto = new javax.swing.JTextField();
         jLabel32 = new javax.swing.JLabel();
         app_update_txt_name = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         app_txt_product_filter = new javax.swing.JTextField();
-        app_btn_filter_product = new javax.swing.JToggleButton();
         app_btn_refresh_tbl_product = new javax.swing.JToggleButton();
         jMenuBar2 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
@@ -395,6 +393,11 @@ public final class App extends javax.swing.JFrame {
         );
 
         Ventas.setBackground(new java.awt.Color(172, 32, 40));
+        Ventas.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                VentasComponentShown(evt);
+            }
+        });
 
         jPanel11.setBackground(new java.awt.Color(172, 32, 40));
 
@@ -402,7 +405,6 @@ public final class App extends javax.swing.JFrame {
 
         jLabel27.setText("Que desea comprar");
 
-        app_cb_store_product.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Arbol de Navidad", "Bolas de Navidad ", "Luces de Navidad", "Estrella de Navidad", "Guirnaldas", "Adornos Colgantes", "Coronas Navideñas", "Figuras y decoraciones tematicas", "Velas Navideñas", "Centros de mesa" }));
         app_cb_store_product.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 app_cb_store_productActionPerformed(evt);
@@ -483,6 +485,11 @@ public final class App extends javax.swing.JFrame {
         jLabel26.setText("Si no tiene cuenta");
 
         app_btn_store_create_user.setText("Crear Cuenta");
+        app_btn_store_create_user.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                app_btn_store_create_userActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel13Layout = new javax.swing.GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
@@ -505,9 +512,14 @@ public final class App extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jLabel29.setText("Precio: ");
+        app_lbl_store_price.setText("Precio: ");
 
         app_btn_store_refresh_price.setText("Actualizar Precio");
+        app_btn_store_refresh_price.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                app_btn_store_refresh_priceActionPerformed(evt);
+            }
+        });
 
         jLabel30.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel30.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/carrito-de-compras.png"))); // NOI18N
@@ -520,7 +532,7 @@ public final class App extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel18Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(app_btn_store_refresh_price, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel29, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(app_lbl_store_price, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -530,7 +542,7 @@ public final class App extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jLabel30, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jLabel29, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(app_lbl_store_price, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(app_btn_store_refresh_price, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -783,14 +795,6 @@ public final class App extends javax.swing.JFrame {
         jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/bolsa-de-regalo.png"))); // NOI18N
 
-        txt_btn_clear_all.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/broom_4488.png"))); // NOI18N
-        txt_btn_clear_all.setText("Limpiar Campos");
-        txt_btn_clear_all.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_btn_clear_allActionPerformed(evt);
-            }
-        });
-
         app_txt_nombre_de_producto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 app_txt_nombre_de_productoActionPerformed(evt);
@@ -843,8 +847,7 @@ public final class App extends javax.swing.JFrame {
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(app_txt_delete_id_product)
-                            .addComponent(app_btn_delete_product, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txt_btn_clear_all, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(app_btn_delete_product, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 322, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(app_btn_add_product, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -899,10 +902,8 @@ public final class App extends javax.swing.JFrame {
                         .addComponent(app_txt_delete_id_product, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(app_btn_delete_product)
-                        .addGap(34, 34, 34)
-                        .addComponent(txt_btn_clear_all, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -916,14 +917,12 @@ public final class App extends javax.swing.JFrame {
             }
         });
 
-        app_btn_filter_product.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/buscar.png"))); // NOI18N
-        app_btn_filter_product.addActionListener(new java.awt.event.ActionListener() {
+        app_btn_refresh_tbl_product.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar-flecha.png"))); // NOI18N
+        app_btn_refresh_tbl_product.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                app_btn_filter_productActionPerformed(evt);
+                app_btn_refresh_tbl_productActionPerformed(evt);
             }
         });
-
-        app_btn_refresh_tbl_product.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/actualizar-flecha.png"))); // NOI18N
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -933,30 +932,23 @@ public final class App extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(app_txt_product_filter)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(app_btn_refresh_tbl_product, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(app_btn_filter_product)
+                    .addComponent(app_txt_product_filter))
+                .addGap(5, 5, 5)
+                .addComponent(app_btn_refresh_tbl_product, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(app_btn_refresh_tbl_product)
-                    .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(jLabel12)
-                        .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(18, 18, 18)
-                                .addComponent(app_txt_product_filter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel4Layout.createSequentialGroup()
-                                .addGap(12, 12, 12)
-                                .addComponent(app_btn_filter_product)))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel12)
+                .addGap(18, 18, 18)
+                .addComponent(app_txt_product_filter, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(app_btn_refresh_tbl_product)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -1000,6 +992,11 @@ public final class App extends javax.swing.JFrame {
         app_menu_item_ventas.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_2, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         app_menu_item_ventas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/ventas.png"))); // NOI18N
         app_menu_item_ventas.setText("Ventas");
+        app_menu_item_ventas.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentShown(java.awt.event.ComponentEvent evt) {
+                app_menu_item_ventasComponentShown(evt);
+            }
+        });
         app_menu_item_ventas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 app_menu_item_ventasActionPerformed(evt);
@@ -1075,37 +1072,20 @@ public final class App extends javax.swing.JFrame {
 
     }//GEN-LAST:event_app_btn_delete_productActionPerformed
 
-    private void app_btn_filter_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_filter_productActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_app_btn_filter_productActionPerformed
-
     private void app_menu_item_filterActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_menu_item_filterActionPerformed
         // TODO add your handling code here:
-        this.FilterDate.setLocationRelativeTo(this);
         this.FilterDate.setVisible(true);
-        this.FilterDate.setSize(1128, 840);
-        this.FilterDate.setTitle("FilterDate");
+        
     }//GEN-LAST:event_app_menu_item_filterActionPerformed
-
-    private void txt_btn_clear_allActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_btn_clear_allActionPerformed
-        // TODO add your handling code here:
-
-    }//GEN-LAST:event_txt_btn_clear_allActionPerformed
 
     private void app_menu_item_ventasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_menu_item_ventasActionPerformed
         // TODO add your handling code here:
         this.Ventas.setVisible(true);
-        this.Ventas.setLocationRelativeTo(null);
-        this.Ventas.setSize(450, 660);
-        this.Ventas.setTitle("Ventas");
     }//GEN-LAST:event_app_menu_item_ventasActionPerformed
 
     private void app_menu_item_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_menu_item_userActionPerformed
         // TODO add your handling code here:
         this.CrearUsuario.setVisible(true);
-        this.CrearUsuario.setLocationRelativeTo(null);
-        this.CrearUsuario.setSize(450, 380);
-        this.CrearUsuario.setTitle("CrearUsuario");
     }//GEN-LAST:event_app_menu_item_userActionPerformed
 
     private void app_btn_generate_balanceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_generate_balanceActionPerformed
@@ -1177,6 +1157,8 @@ public final class App extends javax.swing.JFrame {
 
     private void app_cb_store_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_cb_store_productActionPerformed
         // TODO add your handling code here:
+
+
     }//GEN-LAST:event_app_cb_store_productActionPerformed
 
     private void app_btn_add_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_add_userActionPerformed
@@ -1250,6 +1232,49 @@ public final class App extends javax.swing.JFrame {
 
     }//GEN-LAST:event_app_txt_product_filterKeyReleased
 
+    private void app_btn_refresh_tbl_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_refresh_tbl_productActionPerformed
+        try {
+            // TODO add your handling code here:
+
+            String dato = app_txt_product_filter.getText();
+            filtrarTabla(dato);
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_app_btn_refresh_tbl_productActionPerformed
+
+    private void app_btn_store_refresh_priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_store_refresh_priceActionPerformed
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_app_btn_store_refresh_priceActionPerformed
+
+    private void app_menu_item_ventasComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_app_menu_item_ventasComponentShown
+        // TODO add your handling code here:
+
+
+    }//GEN-LAST:event_app_menu_item_ventasComponentShown
+
+    private void VentasComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_VentasComponentShown
+        try {
+            // TODO add your handling code here:
+
+            actualizarComboboxProductos();
+            System.out.println("hola");
+        } catch (SQLException ex) {
+            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println("error al cargar el combobox de nombre de productos");
+        }
+
+    }//GEN-LAST:event_VentasComponentShown
+
+    private void app_btn_store_create_userActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_store_create_userActionPerformed
+        // TODO add your handling code here:
+
+        CrearUsuario.setVisible(true);
+
+    }//GEN-LAST:event_app_btn_store_create_userActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1288,7 +1313,6 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JToggleButton app_btn_add_user;
     private javax.swing.JToggleButton app_btn_delete_product;
     private javax.swing.JToggleButton app_btn_filter_date;
-    private javax.swing.JToggleButton app_btn_filter_product;
     private javax.swing.JToggleButton app_btn_generate_balance;
     private javax.swing.JToggleButton app_btn_modify_product;
     private javax.swing.JToggleButton app_btn_refresh_tbl_product;
@@ -1298,6 +1322,7 @@ public final class App extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser app_calendar_filter_end;
     private com.toedter.calendar.JDateChooser app_calendar_filter_start;
     private javax.swing.JComboBox<String> app_cb_store_product;
+    private javax.swing.JLabel app_lbl_store_price;
     private javax.swing.JMenuItem app_menu_item_filter;
     private javax.swing.JMenuItem app_menu_item_user;
     private javax.swing.JMenuItem app_menu_item_ventas;
@@ -1335,7 +1360,6 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel29;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
@@ -1366,7 +1390,6 @@ public final class App extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel9;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JToggleButton txt_btn_clear_all;
     // End of variables declaration//GEN-END:variables
 
     public void actualizarTablaProducto() throws SQLException {
@@ -1401,23 +1424,25 @@ public final class App extends javax.swing.JFrame {
         this.setTitle("Formulario");
         this.setLocationRelativeTo(null);
         this.cerrarVentana();
+        //this.CrearUsuario.setLocationRelativeTo(null);
+        this.CrearUsuario.setSize(450, 380);
+        this.CrearUsuario.setTitle("CrearUsuario");
+        //this.Ventas.setLocationRelativeTo(null);
+        this.Ventas.setSize(450, 660);
+        this.Ventas.setTitle("Ventas");
+        this.FilterDate.setLocationRelativeTo(this);
+        this.FilterDate.setSize(1128, 840);
+        this.FilterDate.setTitle("FilterDate");
     }
 
     public void actualizarComboboxProductos() throws SQLException {
-
+        app_cb_store_product.removeAllItems();
         List<String> nombres;
-        try {
-            nombres = manager.getdProducto().getNameProducto();
-            for (String nombre : nombres) {
-                System.out.println(nombre);
-                //app_cb_product_modify.addItem(nombre);
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
-            System.out.println("error al cargar el combobox de nombre de productos");
-
+        nombres = manager.getdProducto().getNameProducto();
+        for (String nombre : nombres) {
+            System.out.println(nombre);
+            app_cb_store_product.addItem(nombre);
         }
-
     }
 
 }
