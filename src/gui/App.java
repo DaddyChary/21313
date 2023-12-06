@@ -6,7 +6,6 @@ package gui;
 
 import db.dao.DAOManager;
 import db.dao.DAOProducto;
-import db.dao.DAOVenta;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import model.Producto;
@@ -19,7 +18,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.SwingConstants;
 import model.Usuario;
 import model.Venta;
 import model.tm.TMVenta;
@@ -35,6 +33,8 @@ public final class App extends javax.swing.JFrame {
 
     /**
      * Creates new form Formulario
+     *
+     * @throws java.sql.SQLException
      */
     public App() throws SQLException {
         initComponents();
@@ -51,7 +51,7 @@ public final class App extends javax.swing.JFrame {
             app_tbl_product.setModel(tMProducto);
 
         } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(null, "Enciende el Xammp", "Aceptar", JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showConfirmDialog(null, "Enciende el Xampp", "Aceptar", JOptionPane.DEFAULT_OPTION);
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
         actualizarComboboxProductos();
@@ -197,7 +197,7 @@ public final class App extends javax.swing.JFrame {
         );
 
         app_btn_generate_balance.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        app_btn_generate_balance.setText("Generar Balance");
+        app_btn_generate_balance.setText("Generar balance");
         app_btn_generate_balance.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 app_btn_generate_balanceActionPerformed(evt);
@@ -210,10 +210,10 @@ public final class App extends javax.swing.JFrame {
         jPanel9.setPreferredSize(new java.awt.Dimension(283, 0));
 
         jLabel15.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel15.setText("Elija la fecha de termino de la busqueda ");
+        jLabel15.setText("Elija la fecha de término de la búsqueda ");
 
         jLabel14.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel14.setText("Elija la fecha de inicio de la busqueda ");
+        jLabel14.setText("Elija la fecha de inicio de la búsqueda ");
 
         app_calendar_filter_start.setDateFormatString("yyyy-MM-dd");
 
@@ -251,7 +251,7 @@ public final class App extends javax.swing.JFrame {
                 .addGap(11, 11, 11))
         );
 
-        app_btn_filter_date.setText("Filtrar Por Fecha");
+        app_btn_filter_date.setText("Filtrar por fecha");
         app_btn_filter_date.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 app_btn_filter_dateActionPerformed(evt);
@@ -456,7 +456,7 @@ public final class App extends javax.swing.JFrame {
 
         jLabel24.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel24.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel24.setText("Chrismax Strore");
+        jLabel24.setText("Christmas store");
 
         javax.swing.GroupLayout jPanel17Layout = new javax.swing.GroupLayout(jPanel17);
         jPanel17.setLayout(jPanel17Layout);
@@ -479,7 +479,7 @@ public final class App extends javax.swing.JFrame {
         jLabel26.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel26.setText("Si no tiene cuenta");
 
-        app_btn_store_create_user.setText("Crear Cuenta");
+        app_btn_store_create_user.setText("Crear cuenta");
         app_btn_store_create_user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 app_btn_store_create_userActionPerformed(evt);
@@ -509,7 +509,7 @@ public final class App extends javax.swing.JFrame {
 
         app_lbl_store_price.setText("Precio: ");
 
-        app_btn_store_refresh_price.setText("Actualizar Precio");
+        app_btn_store_refresh_price.setText("Actualizar precio");
         app_btn_store_refresh_price.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 app_btn_store_refresh_priceActionPerformed(evt);
@@ -591,7 +591,7 @@ public final class App extends javax.swing.JFrame {
 
         jLabel20.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel20.setText("Agregar Usuario");
+        jLabel20.setText("Agregar usuario");
 
         jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/perfil.png"))); // NOI18N
@@ -629,7 +629,7 @@ public final class App extends javax.swing.JFrame {
 
         app_add_user_rut.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        app_btn_add_user.setText("Agregar Usuario");
+        app_btn_add_user.setText("Agregar usuario");
         app_btn_add_user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 app_btn_add_userActionPerformed(evt);
@@ -739,12 +739,12 @@ public final class App extends javax.swing.JFrame {
         );
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jLabel1.setText("Seleccione El Producto (Arbol,Decoracion)");
+        jLabel1.setText("Ingrese el producto");
 
         app_txt_add_product_description.setActionCommand("<Not Set>");
 
         jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Descripcion del producto para agregar");
+        jLabel2.setText("Descripción del producto para agregar");
 
         app_btn_add_product.setText("Agregar Producto");
         app_btn_add_product.addActionListener(new java.awt.event.ActionListener() {
@@ -770,7 +770,7 @@ public final class App extends javax.swing.JFrame {
         jLabel5.setText("Ingrese el precio del producto");
 
         jLabel7.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel7.setText("Descripcion del producto a modificar");
+        jLabel7.setText("Descripción del producto a modificar");
 
         jLabel8.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         jLabel8.setText("Ingrese el precio del producto");
@@ -845,7 +845,7 @@ public final class App extends javax.swing.JFrame {
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, 240, Short.MAX_VALUE)
                             .addComponent(app_txt_delete_id_product)
                             .addComponent(app_btn_delete_product, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -856,10 +856,11 @@ public final class App extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel2))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
@@ -903,7 +904,7 @@ public final class App extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(app_btn_delete_product)
                         .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 166, Short.MAX_VALUE))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, 171, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -931,7 +932,7 @@ public final class App extends javax.swing.JFrame {
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 596, Short.MAX_VALUE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, 598, Short.MAX_VALUE)
                     .addComponent(app_txt_product_filter))
                 .addGap(5, 5, 5)
                 .addComponent(app_btn_refresh_tbl_product, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1006,7 +1007,7 @@ public final class App extends javax.swing.JFrame {
 
         app_menu_item_user.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_3, java.awt.event.InputEvent.CTRL_DOWN_MASK));
         app_menu_item_user.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/cuenta-de-usuario.png"))); // NOI18N
-        app_menu_item_user.setText("CrearUsuario");
+        app_menu_item_user.setText("Crear usuario");
         app_menu_item_user.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 app_menu_item_userActionPerformed(evt);
@@ -1043,12 +1044,9 @@ public final class App extends javax.swing.JFrame {
             // TODO add your handling code here:
             Producto producto = new Producto();
             producto.setName(app_txt_nombre_de_producto.getText());
-            try {
-                producto.setPrice(Integer.parseInt(app_txt_product_add_price.getText()));
-            } catch (NumberFormatException e) {
-                JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
-                return;
-            }
+
+            producto.setPrice(Integer.parseInt(app_txt_product_add_price.getText()));
+
             producto.setDescription(app_txt_add_product_description.getText());
             manager.getdProducto().create(producto);
             actualizarTablaProducto();
@@ -1057,21 +1055,16 @@ public final class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showConfirmDialog(null, "Error al agregar el producto", "Aceptar", JOptionPane.DEFAULT_OPTION);
+        } catch (NumberFormatException e) {
+            JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
-
-
     }//GEN-LAST:event_app_btn_add_productActionPerformed
 
     private void app_btn_delete_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_delete_productActionPerformed
         try {
 
             Producto producto = new Producto();
-            try {
-                producto.setId(Integer.parseInt(app_txt_delete_id_product.getText()));
-            } catch (NumberFormatException e) {
-                JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
-                return;
-            }
+            producto.setId(Integer.parseInt(app_txt_delete_id_product.getText()));
             manager.getdProducto().delete(producto);
             actualizarTablaProducto();
 
@@ -1079,6 +1072,8 @@ public final class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showConfirmDialog(null, "El producto no pudo ser eliminado", "Aceptar", JOptionPane.DEFAULT_OPTION);
+        } catch (NumberFormatException e) {
+            JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
 
     }//GEN-LAST:event_app_btn_delete_productActionPerformed
@@ -1113,8 +1108,7 @@ public final class App extends javax.swing.JFrame {
             JOptionPane.showConfirmDialog(null, "El Balance total de las ventas entre las fechas "
                     + fechaStartFormateada + " y " + fechaEndFormateada + " es:"
                     + "" + manager.getdVenta().getTotalVentasPorFecha(fechaStart, fechaEnd),
-                    "Acpetar", JOptionPane.DEFAULT_OPTION);
-
+                    "Aceptar", JOptionPane.DEFAULT_OPTION);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showConfirmDialog(null, "No se pudo obtener el balance", "Aceptar", JOptionPane.DEFAULT_OPTION);
@@ -1154,25 +1148,21 @@ public final class App extends javax.swing.JFrame {
             //System.out.println(producto);
 
             usuario = manager.getdUser().getOne(app_txt_store_rut.getText());
-            try {
 
-                int amount = Integer.parseInt(app_txt_store_amount.getText());
-                venta.setProductID(producto.getId());
-                venta.setUserID(usuario.getId());
-                venta.setAmount(amount);
-                //System.out.println(venta);
-                manager.getdVenta().create(venta);
-            } catch (NumberFormatException e) {
-                JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
-                return;
-            }
-            JOptionPane.showConfirmDialog(null, "Agregado al carrito con exito", "Acpetar", JOptionPane.DEFAULT_OPTION);
+            int amount = Integer.parseInt(app_txt_store_amount.getText());
+            venta.setProductID(producto.getId());
+            venta.setUserID(usuario.getId());
+            venta.setAmount(amount);
+            //System.out.println(venta);
+            manager.getdVenta().create(venta);
 
+            JOptionPane.showConfirmDialog(null, "Agregado al carrito con exito", "Aceptar", JOptionPane.DEFAULT_OPTION);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showConfirmDialog(null, "No se pudo agregar al carrito", "Aceptar", JOptionPane.DEFAULT_OPTION);
+        } catch (NumberFormatException e) {
+            JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
-
 
     }//GEN-LAST:event_app_btn_store_add_trolleyActionPerformed
 
@@ -1190,10 +1180,9 @@ public final class App extends javax.swing.JFrame {
             usuario.setRut(app_add_user_rut.getText());
 
             manager.getdUser().create(usuario);
-            JOptionPane.showConfirmDialog(null, "Usuario creado correctamente", "Acpetar", JOptionPane.DEFAULT_OPTION);
-
+            JOptionPane.showConfirmDialog(null, "Usuario creado correctamente", "Aceptar", JOptionPane.DEFAULT_OPTION);
         } catch (SQLException ex) {
-            JOptionPane.showConfirmDialog(null, "El usuario ya existe", "Acpetar", JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showConfirmDialog(null, "El usuario ya existe", "Aceptar", JOptionPane.DEFAULT_OPTION);
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
         }
 
@@ -1206,14 +1195,8 @@ public final class App extends javax.swing.JFrame {
     private void app_btn_modify_productActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_modify_productActionPerformed
         try {
             Producto producto = new Producto();
-
-            try {
-                producto.setId(Integer.parseInt(app_txt_modify_id_product.getText()));
-                producto.setPrice(Integer.parseInt(app_txt_modify_product_price.getText()));
-            } catch (NumberFormatException e) {
-                JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
-                return;
-            }
+            producto.setId(Integer.parseInt(app_txt_modify_id_product.getText()));
+            producto.setPrice(Integer.parseInt(app_txt_modify_product_price.getText()));
             producto.setName(app_txt_modify_name.getText());
             producto.setDescription(app_txt_modify_product_description.getText());
 
@@ -1221,12 +1204,14 @@ public final class App extends javax.swing.JFrame {
             actualizarComboboxProductos();
             actualizarTablaProducto();
 
-            JOptionPane.showConfirmDialog(null, "El producto a sido modificado correctamente", "Aceptar", JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showConfirmDialog(null, "El producto ha sido modificado correctamente", "Aceptar", JOptionPane.DEFAULT_OPTION);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showConfirmDialog(null, "Error al modificar el producto", "Aceptar", JOptionPane.DEFAULT_OPTION);
-        }
+        } catch (NumberFormatException e) {
+            JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
 
+        }
 
     }//GEN-LAST:event_app_btn_modify_productActionPerformed
 
@@ -1272,21 +1257,17 @@ public final class App extends javax.swing.JFrame {
     }//GEN-LAST:event_app_btn_refresh_tbl_productActionPerformed
 
     private void app_btn_store_refresh_priceActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_btn_store_refresh_priceActionPerformed
-        String mensaje = "Total Ventas: ";
+        String mensaje = "Total ventas: ";
         try {
             // TODO add your handling code here:
-            try {
-                int ventas = manager.getdVenta().getTotalVentas();
-                app_lbl_store_price.setText(mensaje + ventas);
-            } catch (NumberFormatException e) {
-                JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
-                return;
-            }
+            int ventas = manager.getdVenta().getTotalVentas();
+            app_lbl_store_price.setText(mensaje + ventas);
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showConfirmDialog(null, "Error al refrescar la tabla", "Aceptar", JOptionPane.DEFAULT_OPTION);
+        } catch (NumberFormatException e) {
+            JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
-
     }//GEN-LAST:event_app_btn_store_refresh_priceActionPerformed
 
     private void app_menu_item_ventasComponentShown(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_app_menu_item_ventasComponentShown
@@ -1316,19 +1297,13 @@ public final class App extends javax.swing.JFrame {
     private void app_tbl_productMouseReleased(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_app_tbl_productMouseReleased
         try {
             // TODO add your handling code here:
-
-            try {
-                int dato = app_tbl_product.getSelectedRow();
-                Object id = app_tbl_product.getValueAt(dato, 0);
-                Producto producto = manager.getdProducto().getOne(Integer.parseInt(id.toString()));
-                app_txt_modify_id_product.setText(producto.getIdString());
-                app_txt_modify_name.setText(producto.getName());
-                app_txt_modify_product_price.setText(producto.getPriceString());
-                app_txt_modify_product_description.setText(producto.getDescription());
-            } catch (NumberFormatException e) {
-                JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
-                return;
-            }
+            int dato = app_tbl_product.getSelectedRow();
+            Object id = app_tbl_product.getValueAt(dato, 0);
+            Producto producto = manager.getdProducto().getOne(Integer.parseInt(id.toString()));
+            app_txt_modify_id_product.setText(producto.getIdString());
+            app_txt_modify_name.setText(producto.getName());
+            app_txt_modify_product_price.setText(producto.getPriceString());
+            app_txt_modify_product_description.setText(producto.getDescription());
 
             //System.out.println(dato);
             //System.out.println(id.toString());
@@ -1336,8 +1311,9 @@ public final class App extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(App.class.getName()).log(Level.SEVERE, null, ex);
             JOptionPane.showConfirmDialog(null, "Error al agregar los campos", "Aceptar", JOptionPane.DEFAULT_OPTION);
+        } catch (NumberFormatException e) {
+            JOptionPane.showConfirmDialog(null, "Ingrese solo numeros", "Aceptar", JOptionPane.DEFAULT_OPTION);
         }
-
 
     }//GEN-LAST:event_app_tbl_productMouseReleased
 

@@ -9,28 +9,26 @@ package model;
  * @author DaddyChary
  */
 public class Producto {
-    
+
     private int id;
-    private String Name;
+    private String name;
     private int price;
     private String description;
 
     public Producto() {
     }
 
-    public Producto(int id, String Name, int price, String description) {
+    public Producto(int id, String name, int price, String description) {
         this.id = id;
-        this.Name = Name;
+        this.name = name;
         this.price = price;
         this.description = description;
-        
-        
     }
 
     public int getId() {
         return id;
     }
-    
+
     public String getIdString() {
         return String.valueOf(id);
     }
@@ -40,11 +38,11 @@ public class Producto {
     }
 
     public String getName() {
-        return Name;
+        return name;
     }
 
-    public void setName(String Name) {
-        this.Name = Name;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public int getPrice() {
@@ -53,8 +51,8 @@ public class Producto {
 
     public String getPriceString() {
         return String.valueOf(price);
-    }    
-    
+    }
+
     public void setPrice(int price) {
         this.price = price;
     }
@@ -69,6 +67,7 @@ public class Producto {
 
     @Override
     public String toString() {
-        return "Producto{" + "id=" + id + ", Name=" + Name + ", price=" + price + ", description=" + description + '}';
+        return "Producto{" + "id=" + id + ", name=" + name + ", price=" + price + ", description=" + description + '}';
     }
+
 }

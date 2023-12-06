@@ -183,7 +183,7 @@
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Segoe UI" size="18" style="0"/>
                     </Property>
-                    <Property name="text" type="java.lang.String" value="Generar Balance"/>
+                    <Property name="text" type="java.lang.String" value="Generar balance"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="app_btn_generate_balanceActionPerformed"/>
@@ -275,7 +275,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Elija la fecha de termino de la busqueda "/>
+                            <Property name="text" type="java.lang.String" value="Elija la fecha de t&#xe9;rmino de la b&#xfa;squeda "/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JLabel" name="jLabel14">
@@ -283,7 +283,7 @@
                             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                               <Font name="Segoe UI" size="14" style="0"/>
                             </Property>
-                            <Property name="text" type="java.lang.String" value="Elija la fecha de inicio de la busqueda "/>
+                            <Property name="text" type="java.lang.String" value="Elija la fecha de inicio de la b&#xfa;squeda "/>
                           </Properties>
                         </Component>
                         <Component class="com.toedter.calendar.JDateChooser" name="app_calendar_filter_start">
@@ -303,7 +303,7 @@
                     </Container>
                     <Component class="javax.swing.JToggleButton" name="app_btn_filter_date">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="Filtrar Por Fecha"/>
+                        <Property name="text" type="java.lang.String" value="Filtrar por fecha"/>
                       </Properties>
                       <Events>
                         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="app_btn_filter_dateActionPerformed"/>
@@ -566,7 +566,7 @@
                       <Font name="Segoe UI" size="36" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Chrismax Strore"/>
+                    <Property name="text" type="java.lang.String" value="Christmas store"/>
                   </Properties>
                 </Component>
               </SubComponents>
@@ -610,7 +610,7 @@
                 </Component>
                 <Component class="javax.swing.JToggleButton" name="app_btn_store_create_user">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Crear Cuenta"/>
+                    <Property name="text" type="java.lang.String" value="Crear cuenta"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="app_btn_store_create_userActionPerformed"/>
@@ -656,7 +656,7 @@
                 </Component>
                 <Component class="javax.swing.JToggleButton" name="app_btn_store_refresh_price">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Actualizar Precio"/>
+                    <Property name="text" type="java.lang.String" value="Actualizar precio"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="app_btn_store_refresh_priceActionPerformed"/>
@@ -758,7 +758,7 @@
                       <Font name="Segoe UI" size="36" style="0"/>
                     </Property>
                     <Property name="horizontalAlignment" type="int" value="0"/>
-                    <Property name="text" type="java.lang.String" value="Agregar Usuario"/>
+                    <Property name="text" type="java.lang.String" value="Agregar usuario"/>
                   </Properties>
                 </Component>
                 <Component class="javax.swing.JLabel" name="jLabel23">
@@ -838,7 +838,7 @@
                 </Component>
                 <Component class="javax.swing.JToggleButton" name="app_btn_add_user">
                   <Properties>
-                    <Property name="text" type="java.lang.String" value="Agregar Usuario"/>
+                    <Property name="text" type="java.lang.String" value="Agregar usuario"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="app_btn_add_userActionPerformed"/>
@@ -894,7 +894,7 @@
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                   <Image iconType="3" name="/Imagenes/cuenta-de-usuario.png"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="CrearUsuario"/>
+                <Property name="text" type="java.lang.String" value="Crear usuario"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="app_menu_item_userActionPerformed"/>
@@ -1082,7 +1082,7 @@
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="jLabel10" max="32767" attributes="0"/>
+                                  <Component id="jLabel10" pref="240" max="32767" attributes="0"/>
                                   <Component id="app_txt_delete_id_product" alignment="0" max="32767" attributes="0"/>
                                   <Component id="app_btn_delete_product" alignment="0" max="32767" attributes="0"/>
                               </Group>
@@ -1098,10 +1098,12 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="3" attributes="0">
-                          <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Component id="jLabel1" min="-2" pref="25" max="-2" attributes="0"/>
                       </Group>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -1152,7 +1154,7 @@
                               <Component id="app_btn_delete_product" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                           </Group>
-                          <Component id="jLabel11" pref="166" max="32767" attributes="0"/>
+                          <Component id="jLabel11" pref="171" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -1165,7 +1167,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="18" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Seleccione El Producto (Arbol,Decoracion)"/>
+                <Property name="text" type="java.lang.String" value="Ingrese el producto"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="app_txt_add_product_description">
@@ -1178,7 +1180,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descripcion del producto para agregar"/>
+                <Property name="text" type="java.lang.String" value="Descripci&#xf3;n del producto para agregar"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JToggleButton" name="app_btn_add_product">
@@ -1230,7 +1232,7 @@
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Segoe UI" size="14" style="0"/>
                 </Property>
-                <Property name="text" type="java.lang.String" value="Descripcion del producto a modificar"/>
+                <Property name="text" type="java.lang.String" value="Descripci&#xf3;n del producto a modificar"/>
               </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel8">
@@ -1307,7 +1309,7 @@
                   <Group type="102" alignment="0" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="jLabel12" pref="596" max="32767" attributes="0"/>
+                          <Component id="jLabel12" pref="598" max="32767" attributes="0"/>
                           <Component id="app_txt_product_filter" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>

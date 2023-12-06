@@ -80,7 +80,7 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 36)); // NOI18N
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagenes/reno.png"))); // NOI18N
-        jLabel1.setText("      Inicio De Sesión");
+        jLabel1.setText("      Inicio de sesión");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -165,7 +165,7 @@ public class Login extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setText("Ingrese Su Rut");
+        jLabel4.setText("Ingrese su rut");
 
         app_login_rut.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -271,7 +271,7 @@ public class Login extends javax.swing.JFrame {
     private void app_login_joinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_app_login_joinActionPerformed
         // Utiliza equals para comparar cadenas, no ==
         if (RUT.equals(app_login_rut.getText())) {
-            JOptionPane.showConfirmDialog(null, "Sessión verificada con exito", "Aceptar", JOptionPane.DEFAULT_OPTION);
+            JOptionPane.showConfirmDialog(null, "Sesión verificada con exito", "Aceptar", JOptionPane.DEFAULT_OPTION);
             this.ocultarVentana();
             app.mostrarVentana();
         } else {

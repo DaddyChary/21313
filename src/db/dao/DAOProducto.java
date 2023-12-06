@@ -133,7 +133,7 @@ public class DAOProducto implements DAO<Producto> {
         return producto;
     }
 
-    public Producto getOnePrecio(int precio) throws SQLException {
+    public Producto getOneProductPrice(int precio) throws SQLException {
         String sql = "SELECT * FROM productos WHERE precio =" + precio + "";
         ResultSet rs = conn.execute(sql);
         Producto producto = new Producto();
